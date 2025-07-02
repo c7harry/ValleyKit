@@ -6,7 +6,6 @@ const learningTools = [
 		title: "BayForm - Professional Resume Builder",
 		description:
 			"Create industry-standard resumes that get noticed by employers. Features modern templates, live preview, PDF export, and QR codes for digital portfolios. Perfect for landing your first tech job or internship.",
-		image: "https://bayclock.netlify.app/preview-bayform.png",
 		headerImage: "/images/BayForm/header.png",
 		link: "https://bayclock.netlify.app/",
 		previewImage: "/images/BayForm/BayForm.png",
@@ -18,10 +17,9 @@ const learningTools = [
 		title: "BayClock - Study & Project Time Tracker",
 		description:
 			"Master time management skills essential for tech careers. Track study sessions, coding projects, and assignments with real-time analytics. Build productivity habits that will serve you throughout your career.",
-		image: "https://bayclock.netlify.app/preview-bayclock.png",
 		headerImage: "/images/BayClock/Header.png",
 		link: "https://bayclock.netlify.app/",
-		previewImage: null,
+		previewImage: "/images/BayClock/BayClock.png",
 		tags: ["Time Management", "Productivity", "Study Skills", "Analytics"],
 		color: "from-green-500 to-teal-600",
 		category: "Productivity",
@@ -30,10 +28,9 @@ const learningTools = [
 		title: "TaskPilot - Chrome Extension To-Do Manager",
 		description:
 			"Stay organized and productive with this modern Chrome extension. Features task management with priorities, due dates, calendar view, work/personal profiles, and dark mode. Perfect for managing coding projects, assignments, and daily tasks.",
-		image: "https://taskpilot.netlify.app/preview-taskpilot.png",
 		headerImage: "/images/TaskPilot/header.png",
-		link: "https://taskpilot.netlify.app/",
-		previewImage: null,
+		link: "https://github.com/c7harry/TaskPilot",
+		previewImage: "/images/TaskPilot/TaskPilot.png",
 		tags: ["Task Management", "Chrome Extension", "Productivity", "Organization"],
 		color: "from-purple-500 to-pink-600",
 		category: "Productivity",
