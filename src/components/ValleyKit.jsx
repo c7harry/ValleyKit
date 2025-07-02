@@ -61,17 +61,6 @@ export default function ValleyKit() {
 					</div>
 				))}
 			</main>
-
-			<footer className="text-center py-8 text-base text-gray-500 bg-white bg-opacity-70 mt-12 shadow-inner">
-				<div className="flex flex-col items-center gap-2">
-					<img
-						src="/images/logo.png"
-						alt="Bay Valley Tech Logo"
-						className="w-8 h-8 mb-1"
-					/>
-					<span>&copy; 2025 ValleyKit. Built by Bay Valley Tech.</span>
-				</div>
-			</footer>
 		</div>
 	);
 }
