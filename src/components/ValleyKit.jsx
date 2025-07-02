@@ -29,6 +29,19 @@ const learningTools = [
 		color: "from-green-500 to-teal-600",
 		category: "Productivity",
 	},
+	{
+		title: "TaskPilot - Chrome Extension To-Do Manager",
+		description:
+			"Stay organized and productive with this modern Chrome extension. Features task management with priorities, due dates, calendar view, work/personal profiles, and dark mode. Perfect for managing coding projects, assignments, and daily tasks.",
+		image: "https://taskpilot.netlify.app/preview-taskpilot.png",
+		headerImage: "/images/TaskPilot/header.png",
+		link: "https://taskpilot.netlify.app/",
+		slideshow: [
+		],
+		tags: ["Task Management", "Chrome Extension", "Productivity", "Organization"],
+		color: "from-purple-500 to-pink-600",
+		category: "Productivity",
+	},
 ];
 
 function Slideshow({ images }) {
@@ -66,11 +79,11 @@ export default function ValleyKit() {
 
 			{/* Student Learning Hub Section */}
 			<section className="container mx-auto px-6 py-4">
-				<div className="text-center mb-12 px-6 py-10 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl border border-blue-100 shadow-lg">
+				<div className="text-center mb-12 px-6 py-10 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl border border-blue-100 shadow-lg max-w-8xl mx-auto">
 					<h2 className="text-5xl font-extrabold text-blue-800 mb-4 tracking-tight drop-shadow-sm">
 						Student Learning Hub
 					</h2>
-					<p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-6 leading-relaxed">
+					<p className="text-xl md:text-2xl text-gray-700 max-w-7xl mx-auto mb-6 leading-relaxed">
 						Welcome to your digital toolkit for success! Access powerful learning resources, productivity tools, and career development applications designed specifically for Bay Valley Tech students.
 					</p>
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
