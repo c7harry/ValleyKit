@@ -9,9 +9,7 @@ const learningTools = [
 		image: "https://bayclock.netlify.app/preview-bayform.png",
 		headerImage: "/images/BayForm/header.png",
 		link: "https://bayclock.netlify.app/",
-		slideshow: [
-			"/images/BayForm/BayForm.png",
-        ],
+		previewImage: "/images/BayForm/BayForm.png",
 		tags: ["Career Prep", "Resume", "Job Search", "Professional"],
 		color: "from-cyan-500 to-blue-400",
 		category: "Career Development",
@@ -23,8 +21,7 @@ const learningTools = [
 		image: "https://bayclock.netlify.app/preview-bayclock.png",
 		headerImage: "/images/BayClock/Header.png",
 		link: "https://bayclock.netlify.app/",
-		slideshow: [
-		],
+		previewImage: null,
 		tags: ["Time Management", "Productivity", "Study Skills", "Analytics"],
 		color: "from-green-500 to-teal-600",
 		category: "Productivity",
@@ -36,21 +33,19 @@ const learningTools = [
 		image: "https://taskpilot.netlify.app/preview-taskpilot.png",
 		headerImage: "/images/TaskPilot/header.png",
 		link: "https://taskpilot.netlify.app/",
-		slideshow: [
-		],
+		previewImage: null,
 		tags: ["Task Management", "Chrome Extension", "Productivity", "Organization"],
 		color: "from-purple-500 to-pink-600",
 		category: "Productivity",
 	},
 ];
 
-function Slideshow({ images }) {
-	if (!images || images.length === 0) return null;
-
+function PreviewImage({ src }) {
+	if (!src) return null;
 	return (
 		<div className="flex justify-center items-center">
 			<img
-				src={images[0]}
+				src={src}
 				alt="Tool Preview"
 				className="w-100 h-100 object-contain rounded-xl shadow-lg transition-all duration-500 transform hover:scale-105"
 			/>
@@ -127,8 +122,8 @@ export default function ValleyKit() {
 							)}
 
 							{/* Slideshow */}
-							{tool.slideshow && tool.slideshow.length > 0 && (
-								<Slideshow images={tool.slideshow} />
+							{tool.previewImage && (
+								<PreviewImage src={tool.previewImage} />
 							)}
 							
 							{/* Content */}
