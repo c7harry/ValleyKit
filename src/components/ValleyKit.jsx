@@ -1,91 +1,46 @@
 import React, { useState, useEffect } from "react";
 import "../index.css";
 
-const tools = [
+const learningTools = [
 	{
-		title: "BayForm - Resume Builder",
+		title: "BayForm - Professional Resume Builder",
 		description:
-			"Build beautiful, professional resumes with modern templates, live preview, PDF export, and QR code features. Built with Next.js and Tailwind CSS.",
+			"Create industry-standard resumes that get noticed by employers. Features modern templates, live preview, PDF export, and QR codes for digital portfolios. Perfect for landing your first tech job or internship.",
 		image: "https://bayclock.netlify.app/preview-bayform.png",
 		headerImage: "/images/BayForm/header.png",
 		link: "https://bayclock.netlify.app/",
-		slideshow: [],
-		tags: ["Resume", "PDF", "Templates", "Next.js"],
+		slideshow: [
+			"/images/BayForm/BayForm.png",
+        ],
+		tags: ["Career Prep", "Resume", "Job Search", "Professional"],
 		color: "from-blue-500 to-purple-600",
+		category: "Career Development",
 	},
 	{
-		title: "BayClock - Time Tracker",
+		title: "BayClock - Study & Project Time Tracker",
 		description:
-			"Track time, manage projects, and analyze productivity with real-time sync, multi-workspace support, and visual dashboards. Built with React and Supabase.",
+			"Master time management skills essential for tech careers. Track study sessions, coding projects, and assignments with real-time analytics. Build productivity habits that will serve you throughout your career.",
 		image: "https://bayclock.netlify.app/preview-bayclock.png",
 		headerImage: "/images/BayClock/Header.png",
 		link: "https://bayclock.netlify.app/",
 		slideshow: [
-			"/images/BayClock/BayClock1.png",
-			"/images/BayClock/BayClock2.png",
-			"/images/BayClock/BayClock3.png",
-			"/images/BayClock/BayClock4.png",
 		],
-		tags: ["Time Tracking", "Analytics", "React", "Supabase"],
+		tags: ["Time Management", "Productivity", "Study Skills", "Analytics"],
 		color: "from-green-500 to-teal-600",
+		category: "Productivity",
 	},
 ];
 
 function Slideshow({ images }) {
-	const [index, setIndex] = useState(0);
-
-	useEffect(() => {
-		if (images && images.length > 1) {
-			const interval = setInterval(() => {
-				setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
-			}, 3000);
-			return () => clearInterval(interval);
-		}
-	}, [images]);
-
 	if (!images || images.length === 0) return null;
 
-	const prev = () => setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
-	const next = () => setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
-
 	return (
-		<div className="relative bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200">
-			<div className="flex justify-center items-center py-6">
-				<img
-					src={images[index]}
-					alt={`Slideshow ${index + 1}`}
-					className="w-64 h-48 object-contain rounded-xl shadow-lg bg-white p-2 transition-all duration-500 transform hover:scale-105"
-				/>
-			</div>
-			{images.length > 1 && (
-				<div className="absolute inset-0 flex items-center justify-between px-4">
-					<button
-						onClick={prev}
-						className="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-blue-600"
-						aria-label="Previous"
-					>
-						←
-					</button>
-					<button
-						onClick={next}
-						className="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-blue-600"
-						aria-label="Next"
-					>
-						→
-					</button>
-				</div>
-			)}
-			<div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
-				{images.map((_, i) => (
-					<button
-						key={i}
-						onClick={() => setIndex(i)}
-						className={`w-2 h-2 rounded-full transition-all duration-200 ${
-							i === index ? "bg-blue-600 w-6" : "bg-gray-400"
-						}`}
-					/>
-				))}
-			</div>
+		<div className="flex justify-center items-center">
+			<img
+				src={images[0]}
+				alt="Tool Preview"
+				className="w-100 h-100 object-contain rounded-xl shadow-lg transition-all duration-500 transform hover:scale-105"
+			/>
 		</div>
 	);
 }
@@ -93,12 +48,12 @@ function Slideshow({ images }) {
 export default function ValleyKit() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-			{/* Hero Section */}
+			{/* Header Section */}
 			<section className="relative overflow-hidden">
 				<div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-				<div className="relative container mx-auto px-6 py-16">
+				<div className="relative container mx-auto px-6 py-4">
 					<div className="text-center max-w-4xl mx-auto">
-						<div className="inline-block bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-8 border border-white/20">
+						<div className="inline-block bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 px-20 mb-0 border border-white/20">
 							<img
 								src="/images/header.png"
 								alt="ValleyKit Header"
@@ -109,27 +64,43 @@ export default function ValleyKit() {
 				</div>
 			</section>
 
-			{/* Tools Section */}
+			{/* Student Learning Hub Section */}
 			<section className="container mx-auto px-6 py-4">
-				<div className="text-center mb-16">
-					<h2 className="text-4xl font-bold text-gray-800 mb-4">
-						Our Tools
+				<div className="text-center mb-12 px-6 py-10 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl border border-blue-100 shadow-lg">
+					<h2 className="text-5xl font-extrabold text-blue-800 mb-4 tracking-tight drop-shadow-sm">
+						Student Learning Hub
 					</h2>
-					<p className="text-xl text-gray-600 max-w-2xl mx-auto">
-						Discover our collection of powerful, user-friendly applications
-						designed to enhance your productivity.
+					<p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-6 leading-relaxed">
+						Welcome to your digital toolkit for success! Access powerful learning resources, productivity tools, and career development applications designed specifically for Bay Valley Tech students.
 					</p>
+					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+						<a
+							href="https://www.bayvalleytech.com/apply"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+						>
+							Join Our Program
+						</a>
+					</div>
 				</div>
 
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-					{tools.map((tool, toolIndex) => (
+					{learningTools.map((tool, toolIndex) => (
 						<div
 							key={tool.title}
-							className="group relative bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+							className="group relative bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
 							style={{ animationDelay: `${toolIndex * 200}ms` }}
 						>
+							{/* Category Badge */}
+							<div className="absolute top-4 right-4 z-10">
+								<span className="px-3 py-1 text-xs font-bold bg-white/90 backdrop-blur-sm text-gray-700 rounded-full shadow-md">
+									{tool.category}
+								</span>
+							</div>
+
 							{/* Gradient Header */}
-							<div className={`h-2 bg-gradient-to-r ${tool.color}`}></div>
+							<div className={`h-3 bg-gradient-to-r ${tool.color}`}></div>
 
 							{/* Tool Header Image */}
 							{tool.headerImage && (
@@ -146,13 +117,14 @@ export default function ValleyKit() {
 							{tool.slideshow && tool.slideshow.length > 0 && (
 								<Slideshow images={tool.slideshow} />
 							)}
+							
 							{/* Content */}
 							<div className="p-8">
 								<div className="flex flex-wrap gap-2 mb-4">
 									{tool.tags.map((tag) => (
 										<span
 											key={tag}
-											className="px-3 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full"
+											className="px-3 py-1 text-xs font-medium bg-blue-50 text-blue-700 rounded-full border border-blue-200"
 										>
 											{tag}
 										</span>
@@ -163,7 +135,7 @@ export default function ValleyKit() {
 									{tool.title}
 								</h3>
 
-								<p className="text-gray-600 leading-relaxed mb-6 line-clamp-3">
+								<p className="text-gray-600 leading-relaxed mb-6">
 									{tool.description}
 								</p>
 
@@ -173,7 +145,7 @@ export default function ValleyKit() {
 									rel="noopener noreferrer"
 									className={`inline-flex items-center justify-center w-full py-4 px-8 bg-gradient-to-r ${tool.color} text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group-hover:shadow-2xl`}
 								>
-									<span>Launch Application</span>
+									<span>Start Learning</span>
 									<svg
 										className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
 										fill="none"
@@ -184,7 +156,7 @@ export default function ValleyKit() {
 											strokeLinecap="round"
 											strokeLinejoin="round"
 											strokeWidth={2}
-											d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+											d="M13 7l5 5m0 0l-5 5m5-5H6"
 										/>
 									</svg>
 								</a>
@@ -195,22 +167,66 @@ export default function ValleyKit() {
 			</section>
 
 			{/* Footer */}
-			<footer className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-16">
-				<div className="container mx-auto px-6 text-center">
-					<div className="flex justify-center items-center mb-6">
-						<img
-							src="/images/logo.png"
-							alt="Bay Valley Tech Logo"
-							className="w-12 h-12 mr-3"
-						/>
-						<span className="text-2xl font-bold">Bay Valley Tech</span>
+			<footer className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-16 mt-16">
+				<div className="container mx-auto px-6">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+						{/* Bay Valley Tech Info */}
+						<div className="text-center md:text-left">
+							<div className="flex justify-center md:justify-start items-center mb-4">
+								<img
+									src="/images/BVT Logo.png"
+									alt="Bay Valley Tech Logo"
+									className="w-12 h-12"
+								/>
+								<span className="text-2xl font-bold">Bay Valley Tech</span>
+							</div>
+							<p className="text-gray-300 mb-4">
+								Empowering careers, enriching communities through free tech education and digital skills training.
+							</p>
+						</div>
+
+						{/* Quick Links */}
+						<div className="text-center">
+							<h4 className="text-lg font-semibold mb-4 text-blue-200">Student Resources</h4>
+							<ul className="space-y-2 text-gray-300">
+								<li>
+									<a href="https://www.bayvalleytech.com/apply" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+										Apply Today
+									</a>
+								</li>
+								<li>
+									<a href="https://www.bayvalleytech.com/contact-us" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+										Contact
+									</a>
+								</li>
+								<li>
+									<a href="https://www.bayvalleytech.com/about" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+										About Us
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						{/* Contact Info */}
+						<div className="text-center md:text-right">
+							<h4 className="text-lg font-semibold mb-4 text-blue-200">Connect With Us</h4>
+							<p className="text-gray-300 mb-2">
+								<a href="mailto:info@bayvalleytech.com" className="hover:text-white transition">
+									info@bayvalleytech.com
+								</a>
+							</p>
+							<p className="text-gray-300 mb-4">Join our Discord for quick help!</p>
+						</div>
 					</div>
-					<p className="text-gray-300 mb-6 text-lg">
-						Building the future, one application at a time.
-					</p>
-					<p className="text-gray-400">
-						&copy; 2025 ValleyKit. All rights reserved.
-					</p>
+
+					<div className="border-t border-gray-700 pt-6 text-center">
+						<p className="text-gray-400 mb-4">
+							"If you can dream it, you can achieve it." - Bay Valley Tech Community
+						</p>
+						<p className="text-gray-400">
+							&copy; 2025 Bay Valley Tech. All rights reserved. | Building the future, one student at a time.
+						</p>
+					</div>
 				</div>
 			</footer>
 		</div>
