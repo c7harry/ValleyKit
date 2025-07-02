@@ -62,16 +62,16 @@ function PreviewImage({ src }) {
 export default function ValleyKit() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-			{/* Header Section */}
+			{/* Header Section - Made more compact */}
 			<section className="relative overflow-hidden">
 				<div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-				<div className="relative container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-					<div className="text-center max-w-4xl mx-auto">
-						<div className="inline-block bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 px-8 sm:px-20 mb-0 border border-white/20">
+				<div className="relative container mx-auto px-3 sm:px-4 py-1 sm:py-2">
+					<div className="text-center max-w-2xl mx-auto">
+						<div className="inline-block bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-md p-2 sm:p-3 px-4 sm:px-6 mb-0 border border-white/20">
 							<img
 								src="/images/header.png"
 								alt="ValleyKit Header"
-								className="w-full max-w-xs sm:max-w-md mx-auto h-16 sm:h-24 object-contain drop-shadow-lg"
+								className="w-full max-w-xs sm:max-w-sm mx-auto h-8 sm:h-10 object-contain drop-shadow-lg"
 							/>
 						</div>
 					</div>
@@ -80,85 +80,85 @@ export default function ValleyKit() {
 
 			{/* Student Learning Hub Section */}
 			<section className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-				<div className="text-center mb-8 sm:mb-12 px-4 sm:px-6 py-6 sm:py-10 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-2xl sm:rounded-3xl border border-blue-100 shadow-lg max-w-8xl mx-auto">
-					<h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-blue-800 mb-3 sm:mb-4 tracking-tight drop-shadow-sm">
+				<div className="text-center mb-4 sm:mb-6 px-2 sm:px-3 py-3 sm:py-4 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-lg sm:rounded-xl border border-blue-100 shadow-sm max-w-4xl mx-auto">
+					<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-800 mb-1 sm:mb-2 tracking-tight drop-shadow-sm">
 						Student Learning Hub
 					</h2>
-					<p className="text-lg sm:text-xl md:text-2xl text-gray-700 max-w-7xl mx-auto mb-4 sm:mb-6 leading-relaxed px-2">
+					<p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-3xl mx-auto mb-2 sm:mb-3 leading-relaxed px-1">
 						Welcome to your digital toolkit for success! Access powerful learning resources, productivity tools, and career development applications designed specifically for Bay Valley Tech students.
 					</p>
-					<div className="flex flex-col gap-3 sm:gap-4 justify-center items-center">
+					<div className="flex flex-col gap-1 sm:gap-2 justify-center items-center">
 						<a
 							href="https://www.bayvalleytech.com/apply"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-800 to-blue-400 text-white text-lg sm:text-xl font-bold rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto max-w-xs"
+							className="px-4 sm:px-5 py-1.5 sm:py-2 bg-gradient-to-r from-blue-800 to-blue-400 text-white text-sm sm:text-base font-bold rounded-md sm:rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto max-w-xs"
 						>
 							Join Our Program
 						</a>
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12 max-w-7xl mx-auto">
+				<div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8 max-w-5xl mx-auto">
 					{learningTools.map((tool, toolIndex) => (
 						<div
 							key={tool.title}
-							className="group relative bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2 border border-gray-100"
+							className="group relative bg-white rounded-lg sm:rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-500 transform hover:-translate-y-0.5 border border-gray-100"
 							style={{ animationDelay: `${toolIndex * 200}ms` }}
 						>
 							{/* Category Badge */}
-							<div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
-								<span className="px-2 sm:px-3 py-1 text-xs font-bold bg-white/90 backdrop-blur-sm text-gray-700 rounded-full shadow-md">
+							<div className="absolute top-1.5 sm:top-2 right-1.5 sm:right-2 z-10">
+								<span className="px-1.5 py-0.5 text-xs font-bold bg-white/90 backdrop-blur-sm text-gray-700 rounded-full shadow-sm">
 									{tool.category}
 								</span>
 							</div>
 
 							{/* Gradient Header */}
-							<div className={`h-2 sm:h-3 bg-gradient-to-r ${tool.color}`}></div>
+							<div className={`h-1 sm:h-1.5 bg-gradient-to-r ${tool.color}`}></div>
 
 							{/* Tool Header Image */}
 							{tool.headerImage && (
-								<div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 border-b border-gray-100">
+								<div className="bg-gradient-to-br from-gray-50 to-white p-2 sm:p-3 border-b border-gray-100">
 									<img
 										src={tool.headerImage}
 										alt={tool.title + " Header"}
-										className="w-full h-12 sm:h-16 object-contain mx-auto filter drop-shadow-md"
+										className="w-full h-8 sm:h-10 object-contain mx-auto filter drop-shadow-md"
 									/>
 								</div>
 							)}
 
 							{/* Preview Image */}
 							{tool.previewImage && (
-								<div className="flex justify-center items-center p-4 sm:p-0">
+								<div className="flex justify-center items-center p-2 sm:p-3">
 									<img
 										src={tool.previewImage}
 										alt="Tool Preview"
-										className="w-full max-w-sm sm:w-100 h-auto sm:h-100 object-contain rounded-lg sm:rounded-xl shadow-lg transition-all duration-500 transform hover:scale-105"
+										className="w-full max-w-xs sm:max-w-xs h-auto object-contain rounded-md shadow-sm transition-all duration-500 transform hover:scale-105"
 									/>
 								</div>
 							)}
 							
 							{/* Content */}
-							<div className="p-6 sm:p-8">
-								<div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+							<div className="p-3 sm:p-4">
+								<div className="flex flex-wrap gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
 									{tool.tags.map((tag) => (
 										<span
 											key={tag}
-											className="px-2 sm:px-3 py-1 text-xs font-medium bg-blue-50 text-blue-700 rounded-full border border-blue-200"
+											className="px-1.5 py-0.5 text-xs font-medium bg-blue-50 text-blue-700 rounded-full border border-blue-200"
 										>
 											{tag}
 										</span>
 									))}
 								</div>
 
-								<h3 className="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-200">
+								<h3 className="text-lg sm:text-xl font-extrabold text-gray-800 mb-0.5 group-hover:text-blue-600 transition-colors duration-200">
 									{tool.title}
 								</h3>
 								{tool.subtitle && (
-									<p className="text-lg sm:text-2xl text-blue-700 mb-3 font-semibold">{tool.subtitle}</p>
+									<p className="text-sm sm:text-base text-blue-700 mb-1.5 font-semibold">{tool.subtitle}</p>
 								)}
 
-								<p className="text-base sm:text-xl text-gray-600 leading-relaxed mb-6">
+								<p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3">
 									{tool.description}
 								</p>
 
@@ -166,11 +166,11 @@ export default function ValleyKit() {
 									href={tool.link}
 									target="_blank"
 									rel="noopener noreferrer"
-									className={`inline-flex items-center justify-center w-full py-4 sm:py-5 px-8 sm:px-10 bg-gradient-to-r ${tool.color} text-white text-lg sm:text-xl font-bold rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group-hover:shadow-2xl`}
+									className={`inline-flex items-center justify-center w-full py-2 sm:py-3 px-4 sm:px-6 bg-gradient-to-r ${tool.color} text-white text-sm sm:text-base font-bold rounded-md sm:rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 group-hover:shadow-xl`}
 								>
 									<span className="text-center">{tool.button}</span>
 									<svg
-										className="ml-2 w-5 sm:w-6 h-5 sm:h-6 transition-transform duration-200 group-hover:translate-x-1 flex-shrink-0"
+										className="ml-1.5 w-3 sm:w-4 h-3 sm:h-4 transition-transform duration-200 group-hover:translate-x-1 flex-shrink-0"
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
@@ -190,28 +190,28 @@ export default function ValleyKit() {
 			</section>
 
 			{/* Footer */}
-			<footer className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-12 sm:py-16 mt-12 sm:mt-16">
+			<footer className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-6 sm:py-8 mt-6 sm:mt-8">
 				<div className="container mx-auto px-4 sm:px-6">
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
 						{/* Bay Valley Tech Info */}
 						<div className="text-center md:text-left">
-							<div className="flex justify-center md:justify-start items-center mb-3 sm:mb-4">
+							<div className="flex justify-center md:justify-start items-center mb-1.5 sm:mb-2">
 								<img
 									src="/images/BVT Logo.png"
 									alt="Bay Valley Tech Logo"
-									className="w-10 sm:w-12 h-10 sm:h-12"
+									className="w-6 sm:w-8 h-6 sm:h-8"
 								/>
-								<span className="text-xl sm:text-2xl font-bold ml-2">Bay Valley Tech</span>
+								<span className="text-base sm:text-lg font-bold ml-1.5">Bay Valley Tech</span>
 							</div>
-							<p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
+							<p className="text-gray-300 mb-1.5 sm:mb-2 text-xs">
 								Empowering careers, enriching communities through free tech education and digital skills training.
 							</p>
 						</div>
 
 						{/* Quick Links */}
 						<div className="text-center">
-							<h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-blue-200">Student Resources</h4>
-							<ul className="space-y-2 text-gray-300 text-sm sm:text-base">
+							<h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-blue-200">Student Resources</h4>
+							<ul className="space-y-0.5 text-gray-300 text-xs">
 								<li>
 									<a href="https://www.bayvalleytech.com/apply" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
 										Apply Today
@@ -232,21 +232,21 @@ export default function ValleyKit() {
 
 						{/* Contact Info */}
 						<div className="text-center md:text-right">
-							<h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-blue-200">Connect With Us</h4>
-							<p className="text-gray-300 mb-2 text-sm sm:text-base">
+							<h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-blue-200">Connect With Us</h4>
+							<p className="text-gray-300 mb-0.5 text-xs">
 								<a href="mailto:info@bayvalleytech.com" className="hover:text-white transition break-all">
 									info@bayvalleytech.com
 								</a>
 							</p>
-							<p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">Join our Discord for quick help!</p>
+							<p className="text-gray-300 mb-1.5 sm:mb-2 text-xs">Join our Discord for quick help!</p>
 						</div>
 					</div>
 
-					<div className="border-t border-gray-700 pt-4 sm:pt-6 text-center">
-						<p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base px-4">
+					<div className="border-t border-gray-700 pt-2 sm:pt-3 text-center">
+						<p className="text-gray-400 mb-1.5 sm:mb-2 text-xs px-1">
 							"If you can dream it, you can achieve it." - Bay Valley Tech Community
 						</p>
-						<p className="text-gray-400 text-xs sm:text-base px-4">
+						<p className="text-gray-400 text-xs px-1">
 							&copy; 2025 Bay Valley Tech. All rights reserved. | Building the future, one student at a time.
 						</p>
 					</div>
