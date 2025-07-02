@@ -7,6 +7,7 @@ const tools = [
 		description:
 			"Build beautiful, professional resumes with modern templates, live preview, PDF export, and QR code features. Built with Next.js and Tailwind CSS.",
 		image: "https://bayclock.netlify.app/preview-bayform.png",
+		headerImage: "/images/BayForm/header.png",
 		link: "https://bayclock.netlify.app/",
 	},
 	{
@@ -14,6 +15,7 @@ const tools = [
 		description:
 			"Track time, manage projects, and analyze productivity with real-time sync, multi-workspace support, and visual dashboards. Built with React and Supabase.",
 		image: "https://bayclock.netlify.app/preview-bayclock.png",
+		headerImage: "/images/BayClock/Header.png",
 		link: "https://bayclock.netlify.app/",
 	},
 ];
@@ -37,23 +39,38 @@ export default function ValleyKit() {
 						key={tool.title}
 						className="group bg-white shadow-xl rounded-2xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl flex flex-col"
 					>
+						{tool.headerImage && (
+							<img
+								src={tool.headerImage}
+								alt={tool.title + " Header"}
+								className="w-full h-20 object-contain bg-white border-b border-gray-100"
+							/>
+						)}
 						<img
 							src={tool.image}
 							alt={tool.title}
 							className="w-full h-56 object-cover group-hover:opacity-90 transition"
 						/>
 						<div className="p-6 flex flex-col flex-1">
-							<h2 className="text-2xl font-bold mb-2 text-orange-600 group-hover:text-orange-700 transition">
+							<h2
+								className="text-2xl font-bold mb-2"
+								style={{ color: "#1e558e" }}
+							>
 								{tool.title}
 							</h2>
-							<p className="text-gray-700 text-base mb-6 flex-1">
+							<p className="text-gray-700 text-base flex-1">
 								{tool.description}
 							</p>
 							<a
 								href={tool.link}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="mt-auto inline-block px-6 py-2 bg-orange-500 text-white font-semibold rounded-lg shadow hover:bg-orange-600 transition"
+								className="inline-block px-6 py-2 rounded-lg shadow transition self-center"
+								style={{
+									backgroundColor: "#1e558e",
+									color: "#fff",
+									marginTop: 8,
+								}}
 							>
 								Visit Site
 							</a>
