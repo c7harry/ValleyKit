@@ -1,6 +1,6 @@
 # Netlify configuration file
 [build]
-  publish = "public"
+  publish = "build"
   command = "npm run build"
 
 [dev]
