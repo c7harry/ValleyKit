@@ -3,7 +3,9 @@ import "../index.css";
 
 const learningTools = [
 	{
-		title: "BayForm - Professional Resume Builder",
+		id: "bayform",
+		title: "BayForm",
+		subtitle: "Professional Resume Builder",
 		description:
 			"Create industry-standard resumes that get noticed by employers. Features modern templates, live preview, PDF export, and QR codes for digital portfolios. Perfect for landing your first tech job or internship.",
 		headerImage: "/images/BayForm/header.png",
@@ -12,9 +14,12 @@ const learningTools = [
 		tags: ["Career Prep", "Resume", "Job Search", "Professional"],
 		color: "from-cyan-500 to-blue-400",
 		category: "Career Development",
+		button: "Build a Resume",
 	},
 	{
-		title: "BayClock - Study & Project Time Tracker",
+		id: "bayclock",
+		title: "BayClock",
+		subtitle: "Study & Project Time Tracker",
 		description:
 			"Master time management skills essential for tech careers. Track study sessions, coding projects, and assignments with real-time analytics. Build productivity habits that will serve you throughout your career.",
 		headerImage: "/images/BayClock/Header.png",
@@ -23,9 +28,12 @@ const learningTools = [
 		tags: ["Time Management", "Productivity", "Study Skills", "Analytics"],
 		color: "from-green-500 to-teal-600",
 		category: "Productivity",
+		button: "Track Your Time",
 	},
 	{
-		title: "TaskPilot - Chrome Extension To-Do Manager",
+		id: "taskpilot",
+		title: "TaskPilot",
+		subtitle: "Chrome Extension To-Do Manager",
 		description:
 			"Stay organized and productive with this modern Chrome extension. Features task management with priorities, due dates, calendar view, work/personal profiles, and dark mode. Perfect for managing coding projects, assignments, and daily tasks.",
 		headerImage: "/images/TaskPilot/header.png",
@@ -34,6 +42,7 @@ const learningTools = [
 		tags: ["Task Management", "Chrome Extension", "Productivity", "Organization"],
 		color: "from-purple-500 to-pink-600",
 		category: "Productivity",
+		button: "Open GitHub To Install",
 	},
 ];
 
@@ -118,11 +127,10 @@ export default function ValleyKit() {
 								</div>
 							)}
 
-							{/* Slideshow */}
+							{/* Preview Image */}
 							{tool.previewImage && (
 								<PreviewImage src={tool.previewImage} />
 							)}
-							
 							{/* Content */}
 							<div className="p-8">
 								<div className="flex flex-wrap gap-2 mb-4">
@@ -136,11 +144,14 @@ export default function ValleyKit() {
 									))}
 								</div>
 
-								<h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-200">
+								<h3 className="text-3xl font-extrabold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-200">
 									{tool.title}
 								</h3>
+								{tool.subtitle && (
+									<p className="text-2xl text-blue-700 mb-3 font-semibold">{tool.subtitle}</p>
+								)}
 
-								<p className="text-gray-600 leading-relaxed mb-6">
+								<p className="text-xl text-gray-600 leading-relaxed mb-6">
 									{tool.description}
 								</p>
 
@@ -148,11 +159,11 @@ export default function ValleyKit() {
 									href={tool.link}
 									target="_blank"
 									rel="noopener noreferrer"
-									className={`inline-flex items-center justify-center w-full py-4 px-8 bg-gradient-to-r ${tool.color} text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group-hover:shadow-2xl`}
+									className={`inline-flex items-center justify-center w-full py-5 px-10 bg-gradient-to-r ${tool.color} text-white text-xl font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group-hover:shadow-2xl`}
 								>
-									<span>Start Learning</span>
+									<span>{tool.button}</span>
 									<svg
-										className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
+										className="ml-2 w-6 h-6 transition-transform duration-200 group-hover:translate-x-1"
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
