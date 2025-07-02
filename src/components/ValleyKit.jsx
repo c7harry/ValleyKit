@@ -13,7 +13,7 @@ const learningTools = [
 			"/images/BayForm/BayForm.png",
         ],
 		tags: ["Career Prep", "Resume", "Job Search", "Professional"],
-		color: "from-blue-500 to-purple-600",
+		color: "from-cyan-500 to-blue-400",
 		category: "Career Development",
 	},
 	{
@@ -78,7 +78,7 @@ export default function ValleyKit() {
 							href="https://www.bayvalleytech.com/apply"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+							className="px-8 py-4 bg-gradient-to-r from-blue-800 to-blue-400 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
 						>
 							Join Our Program
 						</a>
