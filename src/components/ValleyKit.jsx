@@ -427,7 +427,7 @@ export default function ValleyKit() {
 
 			{/* Footer section with info and links */}
 			<motion.footer 
-				className="relative bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 text-white py-6 sm:py-8 mt-6 sm:mt-8 overflow-hidden"
+				className="relative bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 text-white py-2 sm:py-2 mt-6 sm:mt-8 overflow-hidden"
 				initial={{ opacity: 0, y: 50 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
@@ -543,19 +543,18 @@ export default function ValleyKit() {
 
 					{/* Footer quote and copyright */}
 					<motion.div 
-						className="border-t border-gray-700 pt-2 sm:pt-3 text-center"
+						className="text-center"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ delay: 1 }}
 					>
 						<motion.p 
-							className="text-gray-400 mb-1.5 sm:mb-2 text-xs px-1 italic"
+							className="text-gray-400 mb-0.5 sm:mb-1 text-xs px-1 italic"
 							animate={{ opacity: [0.7, 1, 0.7] }}
 							transition={{ duration: 3, repeat: Infinity }}
 						>
-							"If you can dream it, you can achieve it." - Bay Valley Tech Community
 						</motion.p>
-						<p className="text-gray-400 text-xs px-1">
+						<p className="text-gray-400 text-xs px-1 mt-0.5 mb-0.5">
 							&copy; 2025 Bay Valley Tech. All rights reserved.
 						</p>
 					</motion.div>
