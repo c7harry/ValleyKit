@@ -277,19 +277,6 @@ export default function ValleyKit() {
 								data-aos-delay={toolIndex * 100}
 							>
 								<div className="relative bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg overflow-hidden border border-gray-200/50 hover:border-gray-300/50 transition-all duration-500">
-									{/* Category badge in the top right corner */}
-									<motion.div 
-										className="absolute top-2 right-2 z-20"
-										initial={{ opacity: 0, scale: 0 }}
-										animate={{ opacity: 1, scale: 1 }}
-										transition={{ delay: 0.3 + toolIndex * 0.1 }}
-									>
-										<span className="inline-flex items-center px-2 py-1 text-xs font-bold bg-white/95 backdrop-blur-sm text-gray-700 rounded-full shadow-md border border-gray-200">
-											<FiAward className="w-3 h-3 mr-1 text-yellow-500" />
-											{tool.category}
-										</span>
-									</motion.div>
-
 									{/* Animated gradient bar at the top of the card */}
 									<motion.div 
 										className={`h-1.5 bg-gradient-to-r ${tool.color} relative overflow-hidden`}
@@ -328,11 +315,11 @@ export default function ValleyKit() {
 												>
 													<IconComponent className="w-5 h-5" />
 												</motion.div>
-												{/* Tool header image */}
+												{/* Tool header image - bigger size */}
 												<img
 													src={tool.headerImage}
 													alt={tool.title + " Header"}
-													className="h-8 sm:h-10 object-contain filter drop-shadow-md flex-1"
+													className="h-8 sm:h-16 object-contain filter drop-shadow-md flex-1" // Increased height
 												/>
 											</div>
 										</motion.div>
@@ -569,7 +556,7 @@ export default function ValleyKit() {
 							"If you can dream it, you can achieve it." - Bay Valley Tech Community
 						</motion.p>
 						<p className="text-gray-400 text-xs px-1">
-							&copy; 2025 Bay Valley Tech. All rights reserved. | Building the future, one student at a time.
+							&copy; 2025 Bay Valley Tech. All rights reserved.
 						</p>
 					</motion.div>
 				</div>
