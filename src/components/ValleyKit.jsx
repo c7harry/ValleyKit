@@ -22,6 +22,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "../index.css";
 import JoinButton from "./JoinButton.tsx";
+// Import EmailJS for feedback form
+import emailjs from 'emailjs-com';
 
 // List of learning tools to display in the app
 const learningTools = [
@@ -189,6 +191,8 @@ export default function ValleyKit() {
 		subject: '',
 		feedback: ''
 	});
+	// State for custom feedback message modal
+	const [feedbackMessage, setFeedbackMessage] = useState("");
 
 	// Handle form input changes
 	const handleFormChange = (e) => {
@@ -198,13 +202,30 @@ export default function ValleyKit() {
 		});
 	};
 
-	// Handle form submission
+	// Replace the handleFormSubmit function to use EmailJS
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		const mailtoLink = `mailto:harpreetdosanjh25bvt@gmail.com?subject=${encodeURIComponent(feedbackForm.subject)}&body=${encodeURIComponent(`From: ${feedbackForm.email}\n\n${feedbackForm.feedback}`)}`;
-		window.location.href = mailtoLink;
-		setShowFeedbackForm(false);
-		setFeedbackForm({ email: '', subject: '', feedback: '' });
+		const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+		const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+		const USER_ID = process.env.REACT_APP_EMAILJS_USER_ID;
+
+		emailjs.send(
+			SERVICE_ID,
+			TEMPLATE_ID,
+			{
+				from_email: feedbackForm.email,
+				subject: feedbackForm.subject,
+				message: feedbackForm.feedback
+			},
+			USER_ID
+		)
+		.then((result) => {
+			setFeedbackMessage('Thank you for your feedback! We appreciate your input and will review your message soon.');
+			setShowFeedbackForm(false);
+			setFeedbackForm({ email: '', subject: '', feedback: '' });
+		}, (error) => {
+			setFeedbackMessage('Failed to send feedback. Please try again.');
+		});
 	};
 	
 	return (
@@ -680,6 +701,49 @@ export default function ValleyKit() {
 												</motion.button>
 											</motion.div>
 										</form>
+									</motion.div>
+								</motion.div>
+							)}
+
+							{/* Custom Feedback Message Modal */}
+							{feedbackMessage && (
+								<motion.div
+									className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									onClick={() => setFeedbackMessage("")}
+								>
+									<motion.div
+										className="bg-gradient-to-br from-[#1e558e] to-blue-400 rounded-2xl max-w-md w-full shadow-2xl border border-blue-300 relative p-0"
+										initial={{ scale: 0.8, y: 50 }}
+										animate={{ scale: 1, y: 0 }}
+										exit={{ scale: 0.8, y: 50 }}
+										transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+										onClick={e => e.stopPropagation()}
+									>
+										<div className="rounded-t-2xl px-6 pt-6 pb-4 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white text-center">
+											<motion.div
+												className="flex justify-center items-center gap-2 mb-2"
+												initial={{ scale: 0 }}
+												animate={{ scale: 1 }}
+												transition={{ delay: 0.2, type: 'spring' }}
+											>
+												<div className="p-2 bg-white/20 rounded-full text-white shadow-lg">
+													<FiMail className="w-5 h-5" />
+												</div>
+												<h3 className="text-xl font-bold">Feedback Sent</h3>
+											</motion.div>
+										</div>
+										<div className="bg-white rounded-b-2xl px-6 py-6 border-t border-blue-200 text-center">
+											<p className="text-blue-900 text-base font-semibold mb-4">{feedbackMessage}</p>
+											<button
+												onClick={() => setFeedbackMessage("")}
+												className="px-6 py-2 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white font-bold rounded-lg shadow hover:shadow-lg transition-all duration-200"
+											>
+												Close
+											</button>
+										</div>
 									</motion.div>
 								</motion.div>
 							)}
