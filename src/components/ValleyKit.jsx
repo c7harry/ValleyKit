@@ -1,7 +1,7 @@
 // Import React and hooks for state and effects
 import React, { useState, useEffect } from "react";
 // Import animation libraries
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion} from "framer-motion";
 import { useInView as useInViewHook } from "react-intersection-observer";
 // Import icons from react-icons
 import { 
@@ -14,7 +14,6 @@ import {
 	FiMail,
 	FiArrowRight,
 	FiStar,
-	FiZap,
 	FiAward
 } from "react-icons/fi";
 import { BsMortarboard, BsRocket, BsLightbulb } from "react-icons/bs";
@@ -22,7 +21,6 @@ import { BsMortarboard, BsRocket, BsLightbulb } from "react-icons/bs";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../index.css";
-import Button from "./joinbutton.tsx";
 
 // List of learning tools to display in the app
 const learningTools = [
@@ -235,7 +233,7 @@ export default function ValleyKit() {
 						<img
 							src="/images/header.png"
 							alt="ValleyKit Header"
-							className="w-full max-w-md sm:max-w-lg mx-auto h-16 sm:h-18 object-contain drop-shadow-lg mb-1"
+							className="w-full max-w-xs sm:max-w-sm mx-auto h-8 sm:h-10 object-contain drop-shadow-lg mb-3"
 						/>
 
 						{/* Title with icons */}
@@ -245,6 +243,11 @@ export default function ValleyKit() {
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ delay: 0.5, type: "spring" }}
 						>
+							<BsMortarboard className="text-blue-600 text-2xl" />
+							<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight drop-shadow-sm overflow-visible bg-gradient-to-r from-[#1e558e] to-blue-400 text-transparent bg-clip-text leading-[1.3] pb-1">
+								Student Learning Hub
+							</h2>
+							<BsRocket className="text-purple-600 text-2xl" />
 						</motion.div>
 
 						{/* Welcome message */}
@@ -264,14 +267,18 @@ export default function ValleyKit() {
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ delay: 0.9, type: "spring" }}
 						>
-							<a
+							<motion.a
 								href="https://www.bayvalleytech.com/apply"
 								target="_blank"
 								rel="noopener noreferrer"
-								style={{ textDecoration: 'none' }}
+								className="group inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white text-sm sm:text-base font-bold rounded-md sm:rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto max-w-xs"
+								whileHover={{ scale: 1.05, y: -2 }}
+								whileTap={{ scale: 0.98 }}
 							>
-								<Button />
-							</a>
+								<BsLightbulb className="mr-2 group-hover:animate-pulse" />
+								Join Our Program
+								<FiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+							</motion.a>
 						</motion.div>
 					</div>
 				</motion.div>
