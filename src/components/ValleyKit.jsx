@@ -21,7 +21,7 @@ import { BsLightbulb } from "react-icons/bs";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../index.css";
-import JoinButton from "./JoinButton.tsx";
+import JoinButton from "./joinbutton.tsx";
 // Import EmailJS for feedback form
 import emailjs from 'emailjs-com';
 
