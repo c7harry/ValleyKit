@@ -2,10 +2,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = () => {
+interface JoinButtonProps {
+  href: string;
+}
+
+const JoinButton: React.FC<JoinButtonProps> = ({ href }) => {
+  const handleClick = () => {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <StyledWrapper>
-      <button className="cssbuttons-io-button">
+      <button className="cssbuttons-io-button" onClick={handleClick}>
         <span className="gradient-text">Join Our Program</span>
         <div className="icon">
           <svg height={24} width={24} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -85,4 +93,4 @@ const StyledWrapper = styled.div`
   }
 `;
 
-export default Button;
+export default JoinButton;
