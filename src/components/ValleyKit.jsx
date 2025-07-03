@@ -1,6 +1,9 @@
+// Import React and hooks for state and effects
 import React, { useState, useEffect } from "react";
+// Import animation libraries
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useInView as useInViewHook } from "react-intersection-observer";
+// Import icons from react-icons
 import { 
 	FiExternalLink, 
 	FiClock, 
@@ -15,10 +18,12 @@ import {
 	FiAward
 } from "react-icons/fi";
 import { BsMortarboard, BsRocket, BsLightbulb } from "react-icons/bs";
+// Import animation on scroll library
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../index.css";
 
+// List of learning tools to display in the app
 const learningTools = [
 	{
 		id: "bayform",
@@ -73,7 +78,7 @@ const learningTools = [
 	},
 ];
 
-// Animation variants
+// Animation settings for the container (the grid of cards)
 const containerVariants = {
 	hidden: { opacity: 0 },
 	visible: {
@@ -84,6 +89,7 @@ const containerVariants = {
 	},
 };
 
+// Animation settings for each card
 const cardVariants = {
 	hidden: { 
 		opacity: 0, 
@@ -111,16 +117,7 @@ const cardVariants = {
 	},
 };
 
-const floatingAnimation = {
-	y: [0, -10, 0],
-	transition: {
-		duration: 3,
-		ease: "easeInOut",
-		repeat: Infinity,
-	},
-};
-
-// Enhanced feature badge component
+// This component shows a badge for each feature of a tool
 function FeatureBadge({ feature, index }) {
 	return (
 		<motion.span
@@ -135,8 +132,9 @@ function FeatureBadge({ feature, index }) {
 	);
 }
 
-// Enhanced preview image component
+// This component displays a preview image for each tool
 function PreviewImage({ src, alt, tool }) {
+	// useInViewHook checks if the image is visible on the screen
 	const [imageRef, imageInView] = useInViewHook({
 		threshold: 0.3,
 		triggerOnce: true,
@@ -162,6 +160,7 @@ function PreviewImage({ src, alt, tool }) {
 					alt={alt}
 					className="w-full max-w-xs h-auto object-contain rounded-xl shadow-xl border border-gray-200"
 				/>
+				{/* Overlay effect on hover */}
 				<motion.div
 					className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
 					initial={false}
@@ -171,12 +170,9 @@ function PreviewImage({ src, alt, tool }) {
 	);
 }
 
+// Main ValleyKit component
 export default function ValleyKit() {
-	const [headerRef, headerInView] = useInViewHook({
-		threshold: 0.3,
-		triggerOnce: true,
-	});
-
+	// Run animation on scroll setup when the component mounts
 	useEffect(() => {
 		AOS.init({
 			duration: 800,
@@ -187,33 +183,35 @@ export default function ValleyKit() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
-			{/* Subtle intricate wallpaper pattern */}
+			{/* Subtle background wallpaper pattern for style */}
 			<div className="absolute inset-0 opacity-[0.15] pointer-events-none">
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_25px_25px,theme(colors.blue.600)_2px,transparent_2px)] bg-[size:50px_50px]"></div>
 				<div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,theme(colors.indigo.500/0.3)_35%,theme(colors.indigo.500/0.3)_65%,transparent_65%)] bg-[size:20px_20px]"></div>
 				<div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0deg,theme(colors.blue.400/0.2)_60deg,transparent_120deg,theme(colors.purple.400/0.2)_180deg,transparent_240deg,theme(colors.cyan.400/0.2)_300deg,transparent_360deg)] bg-[size:100px_100px]"></div>
 			</div>
 
-			{/* Student Learning Hub Section (now includes header image) */}
-			<section className="container mx-auto px-4 sm:px-6 py-8 sm:py-10 relative z-10">
+			{/* Main section for the Student Learning Hub */}
+			<section className="container mx-auto px-4 sm:px-6 py-8 sm:py-6 relative z-10">
+				{/* Header card with title and description */}
 				<motion.div 
 					className="text-center mb-4 sm:mb-6 px-2 sm:px-3 py-3 sm:py-4 bg-gradient-to-br from-white/80 via-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-blue-100 shadow-lg max-w-4xl mx-auto relative overflow-hidden"
 					data-aos="fade-up"
 					data-aos-delay="200"
 				>
-					{/* Background pattern */}
+					{/* Decorative background pattern */}
 					<div className="absolute inset-0 opacity-5">
 						<div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,theme(colors.blue.500)_1px,transparent_0)] bg-[size:20px_20px]"></div>
 					</div>
 
 					<div className="relative z-10 flex flex-col items-center">
-						{/* Add header.png above the Student Learning Hub title*/}
+						{/* ValleyKit header image above the title */}
 						<img
 							src="/images/header.png"
 							alt="ValleyKit Header"
 							className="w-full max-w-xs sm:max-w-sm mx-auto h-8 sm:h-10 object-contain drop-shadow-lg mb-3"
 						/>
 
+						{/* Title with icons */}
 						<motion.div
 							className="flex items-center justify-center gap-2 mb-2"
 							initial={{ opacity: 0, scale: 0 }}
@@ -227,6 +225,7 @@ export default function ValleyKit() {
 							<BsRocket className="text-purple-600 text-2xl" />
 						</motion.div>
 
+						{/* Welcome message */}
 						<motion.p 
 							className="text-sm sm:text-base md:text-lg text-gray-700 max-w-3xl mx-auto mb-2 sm:mb-3 leading-relaxed px-1"
 							initial={{ opacity: 0, y: 20 }}
@@ -236,6 +235,7 @@ export default function ValleyKit() {
 							Welcome to your digital toolkit for success! Access powerful learning resources, productivity tools, and career development applications designed specifically for Bay Valley Tech students.
 						</motion.p>
 
+						{/* Button to join the program */}
 						<motion.div 
 							className="flex flex-col gap-1 sm:gap-2 justify-center items-center"
 							initial={{ opacity: 0, scale: 0.8 }}
@@ -258,7 +258,7 @@ export default function ValleyKit() {
 					</div>
 				</motion.div>
 
-				{/* Enhanced Tools Grid */}
+				{/* Grid of learning tool cards */}
 				<motion.div 
 					className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8 max-w-5xl mx-auto"
 					variants={containerVariants}
@@ -277,7 +277,7 @@ export default function ValleyKit() {
 								data-aos-delay={toolIndex * 100}
 							>
 								<div className="relative bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg overflow-hidden border border-gray-200/50 hover:border-gray-300/50 transition-all duration-500">
-									{/* Enhanced Category Badge */}
+									{/* Category badge in the top right corner */}
 									<motion.div 
 										className="absolute top-2 right-2 z-20"
 										initial={{ opacity: 0, scale: 0 }}
@@ -290,7 +290,7 @@ export default function ValleyKit() {
 										</span>
 									</motion.div>
 
-									{/* Enhanced Gradient Header */}
+									{/* Animated gradient bar at the top of the card */}
 									<motion.div 
 										className={`h-1.5 bg-gradient-to-r ${tool.color} relative overflow-hidden`}
 										initial={{ scaleX: 0 }}
@@ -311,7 +311,7 @@ export default function ValleyKit() {
 										/>
 									</motion.div>
 
-									{/* Enhanced Tool Header Image */}
+									{/* Tool header image and icon */}
 									{tool.headerImage && (
 										<motion.div 
 											className="bg-gradient-to-br from-gray-50/50 to-white/50 backdrop-blur-sm p-3 border-b border-gray-100/50 relative"
@@ -320,6 +320,7 @@ export default function ValleyKit() {
 											transition={{ delay: 0.4 + toolIndex * 0.1 }}
 										>
 											<div className="flex items-center justify-center gap-3">
+												{/* Tool icon in a colored circle */}
 												<motion.div
 													className={`p-2 rounded-lg bg-gradient-to-r ${tool.color} text-white shadow-lg`}
 													whileHover={{ rotate: [0, -10, 10, 0] }}
@@ -327,6 +328,7 @@ export default function ValleyKit() {
 												>
 													<IconComponent className="w-5 h-5" />
 												</motion.div>
+												{/* Tool header image */}
 												<img
 													src={tool.headerImage}
 													alt={tool.title + " Header"}
@@ -336,7 +338,7 @@ export default function ValleyKit() {
 										</motion.div>
 									)}
 
-									{/* Enhanced Preview Image */}
+									{/* Preview image for the tool */}
 									{tool.previewImage && (
 										<PreviewImage 
 											src={tool.previewImage} 
@@ -345,9 +347,9 @@ export default function ValleyKit() {
 										/>
 									)}
 									
-									{/* Enhanced Content */}
+									{/* Card content: features, title, description, and button */}
 									<div className="p-4 space-y-3">
-										{/* Features */}
+										{/* List of features as badges */}
 										<motion.div 
 											className="flex flex-wrap gap-1"
 											initial={{ opacity: 0 }}
@@ -359,6 +361,7 @@ export default function ValleyKit() {
 											))}
 										</motion.div>
 
+										{/* Tool title with animated icon */}
 										<motion.h3 
 											className="text-lg sm:text-xl font-extrabold text-gray-800 group-hover:text-blue-600 transition-colors duration-300 flex items-center gap-2"
 											initial={{ opacity: 0, x: -20 }}
@@ -374,6 +377,7 @@ export default function ValleyKit() {
 											</motion.div>
 										</motion.h3>
 										
+										{/* Tool subtitle if it exists */}
 										{tool.subtitle && (
 											<motion.p 
 												className="text-sm sm:text-base text-blue-700 font-semibold"
@@ -385,6 +389,7 @@ export default function ValleyKit() {
 											</motion.p>
 										)}
 
+										{/* Tool description */}
 										<motion.p 
 											className="text-xs sm:text-sm text-gray-600 leading-relaxed"
 											initial={{ opacity: 0 }}
@@ -394,6 +399,7 @@ export default function ValleyKit() {
 											{tool.description}
 										</motion.p>
 
+										{/* Button to open the tool's link */}
 										<motion.a
 											href={tool.link}
 											target="_blank"
@@ -405,6 +411,7 @@ export default function ValleyKit() {
 											animate={{ opacity: 1, y: 0 }}
 											transition={{ delay: 1 + toolIndex * 0.1 }}
 										>
+											{/* Animated shine effect on button */}
 											<motion.div
 												className="absolute inset-0 bg-white/20"
 												initial={{ x: "-100%" }}
@@ -418,6 +425,7 @@ export default function ValleyKit() {
 													animate={{ x: [0, 3, 0] }}
 													transition={{ duration: 2, repeat: Infinity, delay: toolIndex * 0.5 }}
 												>
+													{/* Show GitHub icon for TaskPilot, otherwise external link icon */}
 													{tool.id === 'taskpilot' ? <FiGithub /> : <FiExternalLink />}
 												</motion.div>
 											</span>
@@ -430,7 +438,7 @@ export default function ValleyKit() {
 				</motion.div>
 			</section>
 
-			{/* Enhanced Footer */}
+			{/* Footer section with info and links */}
 			<motion.footer 
 				className="relative bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 text-white py-6 sm:py-8 mt-6 sm:mt-8 overflow-hidden"
 				initial={{ opacity: 0, y: 50 }}
@@ -438,7 +446,7 @@ export default function ValleyKit() {
 				transition={{ duration: 0.8 }}
 				viewport={{ once: true }}
 			>
-				{/* Animated background elements */}
+				{/* Animated glowing background circles */}
 				<div className="absolute inset-0 overflow-hidden">
 					{[...Array(3)].map((_, i) => (
 						<motion.div
@@ -468,7 +476,7 @@ export default function ValleyKit() {
 						initial="hidden"
 						animate="visible"
 					>
-						{/* Bay Valley Tech Info */}
+						{/* Bay Valley Tech info section */}
 						<motion.div 
 							className="text-center md:text-left"
 							variants={cardVariants}
@@ -489,7 +497,7 @@ export default function ValleyKit() {
 							</p>
 						</motion.div>
 
-						{/* Quick Links */}
+						{/* Quick links section */}
 						<motion.div 
 							className="text-center"
 							variants={cardVariants}
@@ -525,7 +533,7 @@ export default function ValleyKit() {
 							</ul>
 						</motion.div>
 
-						{/* Contact Info */}
+						{/* Contact info section */}
 						<motion.div 
 							className="text-center md:text-right"
 							variants={cardVariants}
@@ -546,6 +554,7 @@ export default function ValleyKit() {
 						</motion.div>
 					</motion.div>
 
+					{/* Footer quote and copyright */}
 					<motion.div 
 						className="border-t border-gray-700 pt-2 sm:pt-3 text-center"
 						initial={{ opacity: 0 }}
