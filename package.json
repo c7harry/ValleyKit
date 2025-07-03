@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "@react-spring/web": "^10.0.1",
+    "aos": "^2.3.4",
+    "framer-motion": "^12.23.0",
+    "lottie-react": "^2.4.1",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0",
+    "react-spring": "^10.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
