@@ -235,7 +235,7 @@ export default function ValleyKit() {
 						<img
 							src="/images/header.png"
 							alt="ValleyKit Header"
-							className="w-full max-w-xs sm:max-w-sm mx-auto h-8 sm:h-10 object-contain drop-shadow-lg mb-3"
+							className="w-full max-w-md sm:max-w-lg mx-auto h-16 sm:h-18 object-contain drop-shadow-lg mb-1"
 						/>
 
 						{/* Title with icons */}
@@ -245,11 +245,6 @@ export default function ValleyKit() {
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ delay: 0.5, type: "spring" }}
 						>
-							<BsMortarboard className="text-blue-600 text-2xl" />
-							<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight drop-shadow-sm overflow-visible bg-gradient-to-r from-[#1e558e] to-blue-400 text-transparent bg-clip-text leading-[1.3] pb-1">
-								Student Learning Hub
-							</h2>
-							<BsRocket className="text-purple-600 text-2xl" />
 						</motion.div>
 
 						{/* Welcome message */}
