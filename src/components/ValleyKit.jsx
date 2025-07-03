@@ -9,7 +9,7 @@ const learningTools = [
 		description:
 			"Create industry-standard resumes that get noticed by employers. Features modern templates, live preview, PDF export, and QR codes for digital portfolios. Perfect for landing your first tech job or internship.",
 		headerImage: "/images/BayForm/header.png",
-		link: "https://bayclock.netlify.app/",
+		link: "https://bayform.netlify.app/",
 		previewImage: "/images/BayForm/BayForm.png",
 		tags: ["Career Prep", "Resume", "Job Search", "Professional"],
 		color: "from-cyan-500 to-blue-400",
