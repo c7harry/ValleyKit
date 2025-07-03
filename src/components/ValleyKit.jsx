@@ -461,19 +461,6 @@ export default function ValleyKit() {
 						</div>
 
 						<div className="relative z-10">
-							{/* Header Section */}
-							<div className="text-center mb-3">
-								<motion.div
-									className="flex justify-center items-center gap-2 mb-2"
-									initial={{ scale: 0 }}
-									whileInView={{ scale: 1 }}
-									transition={{ delay: 0.2, type: "spring" }}
-								>
-									<h3 className="text-lg sm:text-xl font-bold text-gray-800">
-										Help Us Improve
-									</h3>
-								</motion.div>
-							</div>
 
 							{/* Action Cards Grid */}
 							<motion.div 
