@@ -32,7 +32,7 @@ const StyledWrapper = styled.div`
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
-    box-shadow: inset 0 0 1.6em -0.6em #714da6;
+    box-shadow: inset 0 0 1.6em -0.6em #1e558e;
     overflow: hidden;
     position: relative;
     height: 2.8em;
@@ -41,7 +41,7 @@ const StyledWrapper = styled.div`
   }
 
   .cssbuttons-io-button .gradient-text {
-    background: linear-gradient(to right, #FFFFFFFF, #FFFFFFFF);
+    background: #FFFFFFFF;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -61,7 +61,7 @@ const StyledWrapper = styled.div`
     height: 2.2em;
     width: 2.2em;
     border-radius: 0.7em;
-    box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #1e558e;
     right: 0.3em;
     transition: all 0.3s;
   }
@@ -73,7 +73,7 @@ const StyledWrapper = styled.div`
   .cssbuttons-io-button .icon svg {
     width: 1.1em;
     transition: transform 0.3s;
-    color: #7b52b9;
+    color: #1e558e;
   }
 
   .cssbuttons-io-button:hover .icon svg {
