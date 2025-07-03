@@ -219,7 +219,7 @@ export default function ValleyKit() {
 							transition={{ delay: 0.5, type: "spring" }}
 						>
 							<BsMortarboard className="text-blue-600 text-2xl" />
-							<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-800 tracking-tight drop-shadow-sm">
+							<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-800 tracking-tight drop-shadow-sm overflow-visible">
 								Student Learning Hub
 							</h2>
 							<BsRocket className="text-purple-600 text-2xl" />
@@ -260,7 +260,7 @@ export default function ValleyKit() {
 
 				{/* Grid of learning tool cards */}
 				<motion.div 
-					className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8 max-w-5xl mx-auto"
+					className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8 max-w-5xl mx-auto items-stretch"
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
@@ -270,13 +270,13 @@ export default function ValleyKit() {
 						return (
 							<motion.div
 								key={tool.title}
-								className="group relative"
+								className="group relative h-full flex flex-col"
 								variants={cardVariants}
 								whileHover="hover"
 								data-aos="fade-up"
 								data-aos-delay={toolIndex * 100}
 							>
-								<div className="relative bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg overflow-hidden border border-gray-200/50 hover:border-gray-300/50 transition-all duration-500">
+								<div className="relative bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg overflow-hidden border border-gray-200/50 hover:border-gray-300/50 transition-all duration-500 flex flex-col h-full">
 									{/* Animated gradient bar at the top of the card */}
 									<motion.div 
 										className={`h-1.5 bg-gradient-to-r ${tool.color} relative overflow-hidden`}
@@ -319,7 +319,7 @@ export default function ValleyKit() {
 												<img
 													src={tool.headerImage}
 													alt={tool.title + " Header"}
-													className="h-8 sm:h-16 object-contain filter drop-shadow-md flex-1" // Increased height
+													className="h-8 sm:h-16 object-contain filter drop-shadow-md flex-1"
 												/>
 											</div>
 										</motion.div>
@@ -335,7 +335,7 @@ export default function ValleyKit() {
 									)}
 									
 									{/* Card content: features, title, description, and button */}
-									<div className="p-4 space-y-3">
+									<div className="p-4 space-y-3 flex flex-col flex-1">
 										{/* List of features as badges */}
 										<motion.div 
 											className="flex flex-wrap gap-1"
@@ -386,12 +386,14 @@ export default function ValleyKit() {
 											{tool.description}
 										</motion.p>
 
+										<div className="flex-1" /> {/* Spacer to push button to bottom */}
+
 										{/* Button to open the tool's link */}
 										<motion.a
 											href={tool.link}
 											target="_blank"
 											rel="noopener noreferrer"
-											className={`group/btn inline-flex items-center justify-center w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-gradient-to-r ${tool.color} text-white text-sm sm:text-base font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden`}
+											className={`group/btn inline-flex items-center justify-center w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-gradient-to-r ${tool.color} text-white text-sm sm:text-base font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mt-auto`}
 											whileHover={{ scale: 1.02 }}
 											whileTap={{ scale: 0.98 }}
 											initial={{ opacity: 0, y: 20 }}
@@ -427,7 +429,7 @@ export default function ValleyKit() {
 
 			{/* Footer section with info and links */}
 			<motion.footer 
-				className="relative bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 text-white py-2 sm:py-2 mt-6 sm:mt-8 overflow-hidden"
+				className="relative bg-gradient-to-r from-blue-800 to-blue-400 text-white py-2 sm:py-2 mt-6 sm:mt-8 overflow-hidden"
 				initial={{ opacity: 0, y: 50 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
