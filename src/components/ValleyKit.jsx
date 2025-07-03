@@ -207,7 +207,7 @@ export default function ValleyKit() {
 					</div>
 
 					<div className="relative z-10 flex flex-col items-center">
-						{/* Add header.png above the Student Learning Hub title */}
+						{/* Add header.png above the Student Learning Hub title*/}
 						<img
 							src="/images/header.png"
 							alt="ValleyKit Header"
