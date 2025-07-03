@@ -76,6 +76,7 @@ const learningTools = [
 		features: ["Priority Management", "Due Dates", "Calendar View", "Dark Mode"],
 		bgPattern: "pattern-triangles",
 	},
+
 ];
 
 // Animation settings for the container (the grid of cards)
@@ -126,7 +127,7 @@ function FeatureBadge({ feature, index }) {
 			transition={{ delay: index * 0.1, type: "spring" }}
 			className="inline-flex items-center px-2 py-1 text-xs font-medium bg-white/80 backdrop-blur-sm text-gray-700 rounded-full shadow-sm border border-gray-200 hover:bg-white/90 transition-all"
 		>
-			<FiStar className="w-3 h-3 mr-1 text-yellow-500" />
+			{/* Removed FiStar icon */}
 			{feature}
 		</motion.span>
 	);
@@ -338,7 +339,7 @@ export default function ValleyKit() {
 									<div className="p-4 space-y-3 flex flex-col flex-1">
 										{/* List of features as badges */}
 										<motion.div 
-											className="flex flex-wrap gap-1"
+											className="flex flex-wrap gap-1 justify-center"
 											initial={{ opacity: 0 }}
 											animate={{ opacity: 1 }}
 											transition={{ delay: 0.6 + toolIndex * 0.1 }}
@@ -356,12 +357,6 @@ export default function ValleyKit() {
 											transition={{ delay: 0.7 + toolIndex * 0.1 }}
 										>
 											{tool.title}
-											<motion.div
-												animate={{ rotate: [0, 5, -5, 0] }}
-												transition={{ duration: 2, repeat: Infinity, delay: toolIndex }}
-											>
-												<FiZap className="text-yellow-500" />
-											</motion.div>
 										</motion.h3>
 										
 										{/* Tool subtitle if it exists */}
@@ -427,9 +422,183 @@ export default function ValleyKit() {
 				</motion.div>
 			</section>
 
+			{/* Feedback Section - Unique Design */}
+			<section className="container mx-auto px-4 sm:px-6 py-2 relative z-10">
+				<motion.div 
+					className="max-w-2xl mx-auto"
+					initial={{ opacity: 0, y: 15 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					viewport={{ once: true }}
+				>
+					{/* Feedback Card with unique design */}
+					<div className="relative bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 rounded-xl p-3 sm:p-4 border border-orange-200/50 shadow-md overflow-hidden">
+						{/* Animated background elements */}
+						<div className="absolute inset-0 overflow-hidden">
+							<motion.div
+								className="absolute w-16 h-16 bg-orange-300/20 rounded-full blur-xl -top-4 -left-4"
+								animate={{
+									scale: [1, 1.2, 1],
+									rotate: [0, 180, 360],
+								}}
+								transition={{
+									duration: 8,
+									repeat: Infinity,
+									ease: "easeInOut",
+								}}
+							/>
+							<motion.div
+								className="absolute w-12 h-12 bg-red-300/20 rounded-full blur-xl -bottom-2 -right-2"
+								animate={{
+									scale: [1.2, 1, 1.2],
+									rotate: [360, 180, 0],
+								}}
+								transition={{
+									duration: 6,
+									repeat: Infinity,
+									ease: "easeInOut",
+								}}
+							/>
+						</div>
+
+						<div className="relative z-10">
+							{/* Header Section */}
+							<div className="text-center mb-3">
+								<motion.div
+									className="flex justify-center items-center gap-2 mb-2"
+									initial={{ scale: 0 }}
+									whileInView={{ scale: 1 }}
+									transition={{ delay: 0.2, type: "spring" }}
+								>
+									<div className="p-1.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white shadow-md">
+										<FiMail className="w-3 h-3" />
+									</div>
+									<h3 className="text-lg sm:text-xl font-bold text-gray-800">
+										Help Us Improve ValleyKit
+									</h3>
+									<div className="p-1.5 bg-gradient-to-r from-red-500 to-pink-500 rounded-full text-white shadow-md">
+										<FiZap className="w-3 h-3" />
+									</div>
+								</motion.div>
+							</div>
+
+							{/* Action Cards Grid */}
+							<motion.div 
+								className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3"
+								variants={{
+									hidden: { opacity: 0 },
+									visible: {
+										opacity: 1,
+										transition: { staggerChildren: 0.1 }
+									}
+								}}
+								initial="hidden"
+								whileInView="visible"
+								viewport={{ once: true }}
+							>
+								{[
+									{
+										icon: BsLightbulb,
+										title: "Request Tool",
+										description: "Suggest new tools",
+										color: "from-yellow-400 to-orange-500"
+									},
+									{
+										icon: FiAward,
+										title: "Report Bug", 
+										description: "Help fix issues",
+										color: "from-red-400 to-pink-500"
+									},
+									{
+										icon: FiStar,
+										title: "Share Ideas",
+										description: "Suggest improvements",
+										color: "from-purple-400 to-indigo-500"
+									}
+								].map((item, index) => {
+									const IconComponent = item.icon;
+									return (
+										<motion.div
+											key={item.title}
+											className="bg-white/70 backdrop-blur-sm rounded-lg p-2 text-center border border-gray-200/50 hover:shadow-md transition-all duration-300"
+											variants={{
+												hidden: { opacity: 0, y: 10 },
+												visible: { opacity: 1, y: 0 }
+											}}
+											whileHover={{ scale: 1.03, y: -2 }}
+										>
+											<div className={`w-6 h-6 mx-auto mb-1.5 rounded-md bg-gradient-to-r ${item.color} flex items-center justify-center text-white shadow-md`}>
+												<IconComponent className="w-3 h-3" />
+											</div>
+											<h4 className="font-bold text-gray-800 mb-0.5 text-xs">{item.title}</h4>
+											<p className="text-xs text-gray-600">{item.description}</p>
+										</motion.div>
+									);
+								})}
+							</motion.div>
+
+							{/* CTA Button */}
+							<div className="text-center">
+								<motion.a
+									href="mailto:info@bayvalleytech.com?subject=ValleyKit%20Feedback&body=Hi!%20I%20would%20like%20to:%0D%0A%0D%0A☐%20Request%20a%20new%20tool%0D%0A☐%20Report%20a%20bug%0D%0A☐%20Suggest%20an%20improvement%0D%0A%0D%0ADetails:%0D%0A"
+									className="group inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden text-sm"
+									initial={{ opacity: 0, scale: 0.8 }}
+									whileInView={{ opacity: 1, scale: 1 }}
+									transition={{ delay: 0.6, type: "spring" }}
+									whileHover={{ y: -1 }}
+									whileTap={{ scale: 0.98 }}
+								>
+									{/* Animated shine effect */}
+									<motion.div
+										className="absolute inset-0 bg-white/20"
+										initial={{ x: "-100%" }}
+										whileHover={{ x: "100%" }}
+										transition={{ duration: 0.6 }}
+									/>
+									<span className="relative z-10 flex items-center gap-1.5">
+										<FiMail className="group-hover:animate-bounce w-4 h-4" />
+										Send Feedback
+										<motion.div
+											animate={{ x: [0, 2, 0] }}
+											transition={{ duration: 1.5, repeat: Infinity }}
+										>
+											<FiArrowRight className="w-4 h-4" />
+										</motion.div>
+									</span>
+								</motion.a>
+							</div>
+
+							{/* Bottom decoration */}
+							<motion.div 
+								className="flex justify-center mt-2 space-x-1"
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								transition={{ delay: 0.8 }}
+							>
+								{[...Array(3)].map((_, i) => (
+									<motion.div
+										key={i}
+										className="w-1 h-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full"
+										animate={{
+											scale: [1, 1.5, 1],
+											opacity: [0.5, 1, 0.5],
+										}}
+										transition={{
+											duration: 2,
+											repeat: Infinity,
+											delay: i * 0.2,
+										}}
+									/>
+								))}
+							</motion.div>
+						</div>
+					</div>
+				</motion.div>
+			</section>
+
 			{/* Footer section with info and links */}
 			<motion.footer 
-				className="relative bg-gradient-to-r from-blue-800 to-blue-400 text-white py-2 sm:py-2 mt-6 sm:mt-8 overflow-hidden"
+				className="relative bg-[#1e558e] text-white py-2 sm:py-2 mt-6 sm:mt-8 overflow-hidden"
 				initial={{ opacity: 0, y: 50 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
