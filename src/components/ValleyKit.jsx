@@ -726,28 +726,7 @@ export default function ValleyKit() {
 							)}
 
 							{/* Bottom decoration */}
-							<motion.div 
-								className="flex justify-center mt-2 space-x-1"
-								initial={{ opacity: 0 }}
-								whileInView={{ opacity: 1 }}
-								transition={{ delay: 0.8 }}
-							>
-								{[...Array(3)].map((_, i) => (
-									<motion.div
-										key={i}
-										className="w-1 h-1 bg-gradient-to-r from-[#1e558e] to-blue-400 rounded-full"
-										animate={{
-											scale: [1, 1.5, 1],
-											opacity: [0.5, 1, 0.5],
-										}}
-										transition={{
-											duration: 2,
-											repeat: Infinity,
-											delay: i * 0.2,
-										}}
-									/>
-								))}
-							</motion.div>
+							{/* Removed animated dots under Send Feedback button as requested */}
 						</div>
 					</div>
 				</motion.div>
