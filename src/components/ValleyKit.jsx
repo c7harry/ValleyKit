@@ -182,6 +182,31 @@ export default function ValleyKit() {
 		});
 	}, []);
 
+	// State for feedback form
+	const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+	const [feedbackForm, setFeedbackForm] = useState({
+		email: '',
+		subject: '',
+		feedback: ''
+	});
+
+	// Handle form input changes
+	const handleFormChange = (e) => {
+		setFeedbackForm({
+			...feedbackForm,
+			[e.target.name]: e.target.value
+		});
+	};
+
+	// Handle form submission
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		const mailtoLink = `mailto:harpreetdosanjh25bvt@gmail.com?subject=${encodeURIComponent(feedbackForm.subject)}&body=${encodeURIComponent(`From: ${feedbackForm.email}\n\n${feedbackForm.feedback}`)}`;
+		window.location.href = mailtoLink;
+		setShowFeedbackForm(false);
+		setFeedbackForm({ email: '', subject: '', feedback: '' });
+	};
+	
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
 			{/* Subtle background wallpaper pattern for style */}
@@ -220,7 +245,7 @@ export default function ValleyKit() {
 							transition={{ delay: 0.5, type: "spring" }}
 						>
 							<BsMortarboard className="text-blue-600 text-2xl" />
-							<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-800 tracking-tight drop-shadow-sm overflow-visible">
+							<h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight drop-shadow-sm overflow-visible bg-gradient-to-r from-[#1e558e] to-blue-400 text-transparent bg-clip-text leading-[1.3] pb-1">
 								Student Learning Hub
 							</h2>
 							<BsRocket className="text-purple-600 text-2xl" />
@@ -247,7 +272,7 @@ export default function ValleyKit() {
 								href="https://www.bayvalleytech.com/apply"
 								target="_blank"
 								rel="noopener noreferrer"
-								className="group inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-800 to-blue-400 text-white text-sm sm:text-base font-bold rounded-md sm:rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto max-w-xs"
+								className="group inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white text-sm sm:text-base font-bold rounded-md sm:rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto max-w-xs"
 								whileHover={{ scale: 1.05, y: -2 }}
 								whileTap={{ scale: 0.98 }}
 							>
@@ -432,7 +457,7 @@ export default function ValleyKit() {
 					viewport={{ once: true }}
 				>
 					{/* Feedback Card with unique design */}
-					<div className="relative bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 rounded-xl p-3 sm:p-4 border border-orange-200/50 shadow-md overflow-hidden">
+					<div className="relative bg-gradient-to-br from-[#eaf3fb] via-blue-50 to-blue-100 rounded-xl p-3 sm:p-4 border border-blue-200/50 shadow-md overflow-hidden">
 						{/* Animated background elements */}
 						<div className="absolute inset-0 overflow-hidden">
 							<motion.div
@@ -470,15 +495,12 @@ export default function ValleyKit() {
 									whileInView={{ scale: 1 }}
 									transition={{ delay: 0.2, type: "spring" }}
 								>
-									<div className="p-1.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white shadow-md">
+									<div className="p-1.5 bg-gradient-to-r from-[#1e558e] to-blue-400 rounded-full text-white shadow-md">
 										<FiMail className="w-3 h-3" />
 									</div>
 									<h3 className="text-lg sm:text-xl font-bold text-gray-800">
 										Help Us Improve ValleyKit
 									</h3>
-									<div className="p-1.5 bg-gradient-to-r from-red-500 to-pink-500 rounded-full text-white shadow-md">
-										<FiZap className="w-3 h-3" />
-									</div>
 								</motion.div>
 							</div>
 
@@ -539,9 +561,9 @@ export default function ValleyKit() {
 
 							{/* CTA Button */}
 							<div className="text-center">
-								<motion.a
-									href="mailto:info@bayvalleytech.com?subject=ValleyKit%20Feedback&body=Hi!%20I%20would%20like%20to:%0D%0A%0D%0A☐%20Request%20a%20new%20tool%0D%0A☐%20Report%20a%20bug%0D%0A☐%20Suggest%20an%20improvement%0D%0A%0D%0ADetails:%0D%0A"
-									className="group inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden text-sm"
+								<motion.button
+									onClick={() => setShowFeedbackForm(true)}
+									className="group inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden text-sm"
 									initial={{ opacity: 0, scale: 0.8 }}
 									whileInView={{ opacity: 1, scale: 1 }}
 									transition={{ delay: 0.6, type: "spring" }}
@@ -565,8 +587,144 @@ export default function ValleyKit() {
 											<FiArrowRight className="w-4 h-4" />
 										</motion.div>
 									</span>
-								</motion.a>
+								</motion.button>
 							</div>
+
+							{/* Feedback Form Modal */}
+							{showFeedbackForm && (
+								<motion.div
+									className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									onClick={() => setShowFeedbackForm(false)}
+								>
+									<motion.div
+										className="bg-gradient-to-br from-[#1e558e] to-blue-400 rounded-2xl p-0 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-blue-300 relative"
+										initial={{ scale: 0.8, y: 50 }}
+										animate={{ scale: 1, y: 0 }}
+										exit={{ scale: 0.8, y: 50 }}
+										transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+										onClick={(e) => e.stopPropagation()}
+									>
+										{/* Modal Header */}
+										<div className="rounded-t-2xl px-6 pt-6 pb-4 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white text-center">
+											<motion.div
+												className="flex justify-center items-center gap-2 mb-2"
+												initial={{ scale: 0 }}
+												animate={{ scale: 1 }}
+												transition={{ delay: 0.2, type: 'spring' }}
+											>
+												<div className="p-2 bg-white/20 rounded-full text-white shadow-lg">
+													<FiMail className="w-5 h-5" />
+												</div>
+												<h3 className="text-2xl font-bold">Send Feedback</h3>
+											</motion.div>
+										</div>
+
+										{/* Feedback Form */}
+										<form onSubmit={handleFormSubmit} className="space-y-4 bg-white rounded-b-2xl px-6 py-6 border-t border-blue-200">
+											<motion.div
+												initial={{ opacity: 0, x: -20 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ delay: 0.3 }}
+											>
+												<label htmlFor="email" className="block text-sm font-semibold text-blue-900 mb-2">
+													Your Email
+												</label>
+												<input
+													type="email"
+													id="email"
+													name="email"
+													value={feedbackForm.email}
+													onChange={handleFormChange}
+													required
+													className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-blue-50/50 text-blue-900 placeholder-black"
+													placeholder="your.email@example.com"
+												/>
+											</motion.div>
+
+											<motion.div
+												initial={{ opacity: 0, x: -20 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ delay: 0.4 }}
+											>
+												<label htmlFor="subject" className="block text-sm font-semibold text-blue-900 mb-2">
+													Subject
+												</label>
+												<select
+													id="subject"
+													name="subject"
+													value={feedbackForm.subject}
+													onChange={handleFormChange}
+													required
+													className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-blue-50/50 text-blue-900 placeholder-black text-black"
+												>
+													<option value="" className="text-black">Select a topic</option>
+													<option value="Request a new tool" className="text-black">Request a new tool</option>
+													<option value="Report a bug" className="text-black">Report a bug</option>
+													<option value="Suggest an improvement" className="text-black">Suggest an improvement</option>
+													<option value="General feedback" className="text-black">General feedback</option>
+													<option value="Other" className="text-black">Other</option>
+												</select>
+											</motion.div>
+
+											<motion.div
+												initial={{ opacity: 0, x: -20 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ delay: 0.5 }}
+											>
+												<label htmlFor="feedback" className="block text-sm font-semibold text-blue-900 mb-2">
+													Your Feedback
+												</label>
+												<textarea
+													id="feedback"
+													name="feedback"
+													value={feedbackForm.feedback}
+													onChange={handleFormChange}
+													required
+													rows={5}
+													className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-blue-50/50 text-blue-900 placeholder-black resize-none"
+													placeholder="Share your thoughts, suggestions, or report issues..."
+												/>
+											</motion.div>
+
+											{/* Form Actions */}
+											<motion.div
+												className="flex gap-3 pt-4"
+												initial={{ opacity: 0, y: 20 }}
+												animate={{ opacity: 1, y: 0 }}
+												transition={{ delay: 0.6 }}
+											>
+												<button
+													type="button"
+													onClick={() => setShowFeedbackForm(false)}
+													className="flex-1 px-4 py-3 border border-blue-200 text-blue-700 rounded-lg hover:bg-blue-50 transition-all duration-200 font-medium"
+												>
+													Cancel
+												</button>
+												<motion.button
+													type="submit"
+													className="flex-1 px-4 py-3 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white rounded-lg hover:shadow-lg transition-all duration-200 font-bold relative overflow-hidden"
+													whileHover={{ scale: 1.02 }}
+													whileTap={{ scale: 0.98 }}
+												>
+													<motion.div
+														className="absolute inset-0 bg-white/20"
+														initial={{ x: '-100%' }}
+														whileHover={{ x: '100%' }}
+														transition={{ duration: 0.5 }}
+													/>
+													<span className="relative z-10 flex items-center justify-center gap-2">
+														<FiMail className="w-4 h-4" />
+														Send Feedback
+													</span>
+												</motion.button>
+											</motion.div>
+										</form>
+									</motion.div>
+								</motion.div>
+							)}
 
 							{/* Bottom decoration */}
 							<motion.div 
@@ -578,7 +736,7 @@ export default function ValleyKit() {
 								{[...Array(3)].map((_, i) => (
 									<motion.div
 										key={i}
-										className="w-1 h-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full"
+										className="w-1 h-1 bg-gradient-to-r from-[#1e558e] to-blue-400 rounded-full"
 										animate={{
 											scale: [1, 1.5, 1],
 											opacity: [0.5, 1, 0.5],
