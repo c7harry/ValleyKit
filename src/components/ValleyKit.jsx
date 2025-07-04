@@ -238,10 +238,10 @@ export default function ValleyKit() {
 			</div>
 
 			{/* Main section for the Student Learning Hub */}
-			<section className="container mx-auto px-4 sm:px-6 py-8 sm:py-6 relative z-10">
+			<section className="container mx-auto px-4 sm:px-6 py-4 sm:py-3 relative z-10">
 				{/* Header card with title and description */}
 				<motion.div 
-					className="text-center mb-4 sm:mb-6 px-2 sm:px-3 py-3 sm:py-4 bg-gradient-to-br from-white/80 via-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-blue-100 shadow-lg max-w-4xl mx-auto relative overflow-hidden"
+					className="text-center mb-2 sm:mb-3 px-2 sm:px-3 py-2 sm:py-2 bg-gradient-to-br from-white/80 via-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-blue-100 shadow-lg max-w-4xl mx-auto relative overflow-hidden"
 					data-aos="fade-up"
 					data-aos-delay="200"
 				>
@@ -569,7 +569,7 @@ export default function ValleyKit() {
 								</motion.button>
 							</div>
 
-							{/* Feedback Form Modal */}
+							{/* Feedback Form Modal - moved outside feedback section */}
 							{showFeedbackForm && (
 								<motion.div
 									className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -705,7 +705,7 @@ export default function ValleyKit() {
 								</motion.div>
 							)}
 
-							{/* Custom Feedback Message Modal */}
+							{/* Custom Feedback Message Modal - moved outside feedback section */}
 							{feedbackMessage && (
 								<motion.div
 									className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
