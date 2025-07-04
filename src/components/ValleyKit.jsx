@@ -24,6 +24,7 @@ import "../index.css";
 import JoinButton from "./joinbutton.tsx";
 // Import EmailJS for feedback form
 import emailjs from 'emailjs-com';
+import SendFeedbackButton from "./SendFeedbackButton.tsx";
 
 // List of learning tools to display in the app
 const learningTools = [
@@ -540,33 +541,7 @@ export default function ValleyKit() {
 
 							{/* CTA Button */}
 							<div className="text-center">
-								<motion.button
-									onClick={() => setShowFeedbackForm(true)}
-									className="group inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden text-sm"
-									initial={{ opacity: 0, scale: 0.8 }}
-									whileInView={{ opacity: 1, scale: 1 }}
-									transition={{ delay: 0.6, type: "spring" }}
-									whileHover={{ y: -1 }}
-									whileTap={{ scale: 0.98 }}
-								>
-									{/* Animated shine effect */}
-									<motion.div
-										className="absolute inset-0 bg-white/20"
-										initial={{ x: "-100%" }}
-										whileHover={{ x: "100%" }}
-										transition={{ duration: 0.6 }}
-									/>
-									<span className="relative z-10 flex items-center gap-1.5">
-										<FiMail className="group-hover:animate-bounce w-4 h-4" />
-										Send Feedback
-										<motion.div
-											animate={{ x: [0, 2, 0] }}
-											transition={{ duration: 1.5, repeat: Infinity }}
-										>
-											<FiArrowRight className="w-4 h-4" />
-										</motion.div>
-									</span>
-								</motion.button>
+								<SendFeedbackButton onClick={() => setShowFeedbackForm(true)} />
 							</div>
 
 							{/* Feedback Form Modal - moved outside feedback section */}
