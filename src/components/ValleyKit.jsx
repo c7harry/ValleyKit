@@ -443,39 +443,271 @@ export default function ValleyKit() {
 				</motion.div>
 			</section>
 
-			{/* Feedback Section - Overhauled Design (smaller, centered, less vertical spacing) */}
-			<section className="container mx-auto px-4 sm:px-6 py-2 relative z-10">
-				<motion.div
-					className="max-w-xl mx-auto"
-					initial={{ opacity: 0, y: 30 }}
+			{/* Feedback Section - Unique Design */}
+			<section className="w-full max-w-2xl mx-auto px-2 sm:px-4 pt-0 pb-0 -mb-5 relative z-10">
+				<motion.div 
+					className="w-full"
+					initial={{ opacity: 0, y: 15 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.7 }}
+					transition={{ duration: 0.6 }}
 					viewport={{ once: true }}
 				>
-					{/* New Feedback Card with modern, vibrant style, but smaller */}
-					<div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-100 rounded-2xl p-3 sm:p-4 border border-blue-200/60 shadow-xl overflow-hidden flex flex-col gap-4 items-center">
-						<div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
-							{/* Action Cards - smaller and more compact */}
-							<div className="bg-white/90 rounded-lg p-2 flex flex-col items-center border border-yellow-200 shadow hover:shadow-md transition-all">
-								<BsLightbulb className="w-5 h-5 text-yellow-500 mb-1" />
-								<span className="font-semibold text-yellow-700 text-xs mb-0.5">Request Tool</span>
-								<span className="text-xs text-gray-600 text-center">Suggest new tools</span>
-							</div>
-							<div className="bg-white/90 rounded-lg p-2 flex flex-col items-center border border-pink-200 shadow hover:shadow-md transition-all">
-								<FiAward className="w-5 h-5 text-pink-500 mb-1" />
-								<span className="font-semibold text-pink-700 text-xs mb-0.5">Report Bug</span>
-								<span className="text-xs text-gray-600 text-center">Found an issue?</span>
-							</div>
-							<div className="bg-white/90 rounded-lg p-2 flex flex-col items-center border border-indigo-200 shadow hover:shadow-md transition-all">
-								<FiStar className="w-5 h-5 text-indigo-500 mb-1" />
-								<span className="font-semibold text-indigo-700 text-xs mb-0.5">Share Ideas</span>
-								<span className="text-xs text-gray-600 text-center">Suggest improvements</span>
+					{/* Feedback Card with dock design, now a single row and reduced height */}
+					<div className="relative w-full bg-gradient-to-br from-[#eaf3fb] via-blue-50 to-blue-100 rounded-2xl p-2 sm:p-3 border border-blue-200/50 shadow-lg overflow-visible flex flex-row items-center min-h-[120px] max-h-[160px]">
+						{/* Animated background elements */}
+						<div className="absolute inset-0 overflow-hidden pointer-events-none">
+							<motion.div
+								className="absolute w-16 h-16 bg-orange-300/20 rounded-full blur-2xl -top-8 -left-8"
+								animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+								transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+							/>
+							<motion.div
+								className="absolute w-14 h-14 bg-red-300/20 rounded-full blur-2xl -bottom-6 -right-6"
+								animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
+								transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+							/>
+						</div>
+
+						<div className="relative z-10 flex flex-row items-center justify-between w-full">
+							{/* Action Cards Dock Row */}
+							<motion.div 
+								className="flex flex-row justify-center gap-3 sm:gap-3"
+								variants={{
+									hidden: { opacity: 0 },
+									visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+								}}
+								initial="hidden"
+								whileInView="visible"
+								viewport={{ once: true }}
+							>
+								{[
+									{
+										icon: BsLightbulb,
+										title: "Request Tool",
+										description: "Suggest new tools",
+										color: "from-yellow-400 to-orange-500"
+									},
+									{
+										icon: FiAward,
+										title: "Report Bug", 
+										description: "Help fix issues",
+										color: "from-red-400 to-pink-500"
+									},
+									{
+										icon: FiStar,
+										title: "Share Ideas",
+										description: "Suggest improvements",
+										color: "from-purple-400 to-indigo-500"
+									}
+								].map((item, index) => {
+									const IconComponent = item.icon;
+									return (
+										<motion.div
+											key={item.title}
+											className="flex flex-col items-center bg-white/80 backdrop-blur-md rounded-xl px-4 py-2 border border-gray-200/50 shadow-md hover:shadow-lg transition-all duration-300 min-w-[110px] max-w-[140px] h-[90px] justify-center"
+											variants={{
+												hidden: { opacity: 0, y: 10 },
+												visible: { opacity: 1, y: 0 }
+											}}
+											whileHover={{ scale: 1.06, y: -2 }}
+										>
+											<div className={`w-8 h-8 mb-1 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center text-white shadow-lg`}>
+												<IconComponent className="w-5 h-5" />
+											</div>
+											<h4 className="font-bold text-gray-800 mb-0.5 text-xs text-center leading-tight">{item.title}</h4>
+											<p className="text-[10px] text-gray-600 text-center leading-tight">{item.description}</p>
+										</motion.div>
+									);
+								})}
+							</motion.div>
+
+							{/* CTA Button */}
+							<div className="flex-1 flex justify-center">
+								<SendFeedbackButton onClick={() => setShowFeedbackForm(true)} />
 							</div>
 						</div>
-						{/* Feedback Button - centered */}
-						<div className="w-full flex justify-center mt-1">
-							<SendFeedbackButton onClick={() => setShowFeedbackForm(true)} />
-						</div>
+
+						{/* Feedback Form Modal - moved outside feedback section */}
+						{showFeedbackForm && (
+							<motion.div
+								className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								onClick={() => setShowFeedbackForm(false)}
+							>
+								<motion.div
+									className="bg-gradient-to-br from-[#1e558e] to-blue-400 rounded-2xl p-0 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-blue-300 relative"
+									initial={{ scale: 0.8, y: 50 }}
+									animate={{ scale: 1, y: 0 }}
+									exit={{ scale: 0.8, y: 50 }}
+									transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+									onClick={(e) => e.stopPropagation()}
+								>
+									{/* Modal Header */}
+									<div className="rounded-t-2xl px-6 pt-6 pb-4 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white text-center">
+										<motion.div
+											className="flex justify-center items-center gap-2 mb-2"
+											initial={{ scale: 0 }}
+											animate={{ scale: 1 }}
+											transition={{ delay: 0.2, type: 'spring' }}
+										>
+											<div className="p-2 bg-white/20 rounded-full text-white shadow-lg">
+												<FiMail className="w-5 h-5" />
+											</div>
+											<h3 className="text-2xl font-bold">Send Feedback</h3>
+										</motion.div>
+									</div>
+
+									{/* Feedback Form */}
+									<form onSubmit={handleFormSubmit} className="space-y-4 bg-white rounded-b-2xl px-6 py-6 border-t border-blue-200">
+										<motion.div
+											initial={{ opacity: 0, x: -20 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ delay: 0.3 }}
+										>
+											<label htmlFor="email" className="block text-sm font-semibold text-blue-900 mb-2">
+												Your Email
+											</label>
+											<input
+												type="email"
+												id="email"
+												name="email"
+												value={feedbackForm.email}
+												onChange={handleFormChange}
+												required
+												className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-blue-50/50 text-blue-900 placeholder-black"
+												placeholder="your.email@example.com"
+											/>
+										</motion.div>
+
+										<motion.div
+											initial={{ opacity: 0, x: -20 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ delay: 0.4 }}
+										>
+											<label htmlFor="subject" className="block text-sm font-semibold text-blue-900 mb-2">
+												Subject
+											</label>
+											<select
+												id="subject"
+												name="subject"
+												value={feedbackForm.subject}
+												onChange={handleFormChange}
+												required
+												className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-blue-50/50 text-blue-900 placeholder-black text-black"
+											>
+												<option value="" className="text-black">Select a topic</option>
+												<option value="Request a new tool" className="text-black">Request a new tool</option>
+												<option value="Report a bug" className="text-black">Report a bug</option>
+												<option value="Suggest an improvement" className="text-black">Suggest an improvement</option>
+												<option value="General feedback" className="text-black">General feedback</option>
+												<option value="Other" className="text-black">Other</option>
+											</select>
+										</motion.div>
+
+										<motion.div
+											initial={{ opacity: 0, x: -20 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ delay: 0.5 }}
+										>
+											<label htmlFor="feedback" className="block text-sm font-semibold text-blue-900 mb-2">
+												Your Feedback
+											</label>
+											<textarea
+												id="feedback"
+												name="feedback"
+												value={feedbackForm.feedback}
+												onChange={handleFormChange}
+												required
+												rows={5}
+												className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-blue-50/50 text-blue-900 placeholder-black resize-none"
+												placeholder="Share your thoughts, suggestions, or report issues..."
+											/>
+										</motion.div>
+
+										{/* Form Actions */}
+										<motion.div
+											className="flex gap-3 pt-4"
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ delay: 0.6 }}
+										>
+											<button
+												type="button"
+												onClick={() => setShowFeedbackForm(false)}
+												className="flex-1 px-4 py-3 border border-blue-200 text-blue-700 rounded-lg hover:bg-blue-50 transition-all duration-200 font-medium"
+											>
+												Cancel
+											</button>
+											<motion.button
+												type="submit"
+												className="flex-1 px-4 py-3 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white rounded-lg hover:shadow-lg transition-all duration-200 font-bold relative overflow-hidden"
+												whileHover={{ scale: 1.02 }}
+												whileTap={{ scale: 0.98 }}
+											>
+												<motion.div
+													className="absolute inset-0 bg-white/20"
+													initial={{ x: '-100%' }}
+													whileHover={{ x: '100%' }}
+													transition={{ duration: 0.5 }}
+												/>
+												<span className="relative z-10 flex items-center justify-center gap-2">
+													<FiMail className="w-4 h-4" />
+													Send Feedback
+												</span>
+											</motion.button>
+										</motion.div>
+									</form>
+								</motion.div>
+							</motion.div>
+						)}
+
+						{/* Custom Feedback Message Modal - moved outside feedback section */}
+						{feedbackMessage && (
+							<motion.div
+								className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								onClick={() => setFeedbackMessage("")}
+							>
+								<motion.div
+									className="bg-gradient-to-br from-[#1e558e] to-blue-400 rounded-2xl max-w-md w-full shadow-2xl border border-blue-300 relative p-0"
+									initial={{ scale: 0.8, y: 50 }}
+									animate={{ scale: 1, y: 0 }}
+									exit={{ scale: 0.8, y: 50 }}
+									transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+									onClick={e => e.stopPropagation()}
+								>
+									<div className="rounded-t-2xl px-6 pt-6 pb-4 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white text-center">
+										<motion.div
+											className="flex justify-center items-center gap-2 mb-2"
+											initial={{ scale: 0 }}
+											animate={{ scale: 1 }}
+											transition={{ delay: 0.2, type: 'spring' }}
+										>
+											<div className="p-2 bg-white/20 rounded-full text-white shadow-lg">
+												<FiMail className="w-5 h-5" />
+											</div>
+											<h3 className="text-xl font-bold">Feedback Sent</h3>
+										</motion.div>
+									</div>
+									<div className="bg-white rounded-b-2xl px-6 py-6 border-t border-blue-200 text-center">
+										<p className="text-blue-900 text-base font-semibold mb-4">{feedbackMessage}</p>
+										<button
+											onClick={() => setFeedbackMessage("")}
+											className="px-6 py-2 bg-gradient-to-r from-[#1e558e] to-blue-400 text-white font-bold rounded-lg shadow hover:shadow-lg transition-all duration-200"
+										>
+											Close
+										</button>
+									</div>
+								</motion.div>
+							</motion.div>
+						)}
+
+						{/* Bottom decoration */}
+						{/* Removed animated dots under Send Feedback button as requested */}
 					</div>
 				</motion.div>
 			</section>
