@@ -247,7 +247,7 @@ export default function ValleyKit() {
 
 				{/* Grid of learning tool cards - Minimalistic Design */}
 				<motion.div 
-					className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 max-w-6xl mx-auto"
+					className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6 max-w-6xl mx-auto"
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
@@ -278,7 +278,7 @@ export default function ValleyKit() {
 									/>
 									
 									{/* Icon and Title Header */}
-									<div className="flex items-start gap-4 mb-6">
+									<div className="flex items-start gap-4 mb-4">
 										<motion.div
 											className={`p-3 rounded-2xl bg-gradient-to-br ${tool.color} text-white shadow-lg`}
 											whileHover={{ rotate: [0, -5, 5, 0], scale: 1.05 }}
@@ -286,24 +286,47 @@ export default function ValleyKit() {
 										>
 											<IconComponent className="w-6 h-6" />
 										</motion.div>
-										
-										<div className="flex-1 min-w-0">
-											<motion.h3 
-												className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors duration-300"
-												initial={{ opacity: 0, x: -20 }}
-												animate={{ opacity: 1, x: 0 }}
-												transition={{ delay: 0.4 + toolIndex * 0.1 }}
-											>
-												{tool.title}
-											</motion.h3>
-											<motion.p 
-												className="text-sm font-medium text-gray-500 tracking-wide"
-												initial={{ opacity: 0, x: -20 }}
-												animate={{ opacity: 1, x: 0 }}
-												transition={{ delay: 0.5 + toolIndex * 0.1 }}
-											>
-												{tool.subtitle}
-											</motion.p>
+										<div className="flex-1 min-w-0 flex items-center justify-between">
+											<div className="flex flex-col min-w-0">
+												<motion.h3 
+													className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors duration-300"
+													initial={{ opacity: 0, x: -20 }}
+													animate={{ opacity: 1, x: 0 }}
+													transition={{ delay: 0.4 + toolIndex * 0.1 }}
+												>
+													{tool.title}
+												</motion.h3>
+												<motion.p 
+													className="text-sm font-medium text-gray-500 tracking-wide"
+													initial={{ opacity: 0, x: -20 }}
+													animate={{ opacity: 1, x: 0 }}
+													transition={{ delay: 0.5 + toolIndex * 0.1 }}
+												>
+													{tool.subtitle}
+												</motion.p>
+											</div>
+											{/* Preview Button moved to far right */}
+											{tool.previewImage && (
+												<motion.button
+													onClick={() => handlePreviewImage(tool)}
+													className="group/preview inline-flex items-center gap-2 px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 rounded-xl transition-all duration-200 text-xs font-medium border border-gray-200 hover:border-gray-300 ml-4 whitespace-nowrap"
+													whileHover={{ scale: 1.02 }}
+													whileTap={{ scale: 0.98 }}
+													initial={{ opacity: 0, y: 10 }}
+													animate={{ opacity: 1, y: 0 }}
+													transition={{ delay: 0.75 + toolIndex * 0.1 }}
+												>
+													<FiEye className="w-4 h-4" />
+													<span>Preview App</span>
+													<motion.div
+														className="opacity-0 group-hover/preview:opacity-100 transition-opacity"
+														animate={{ x: [0, 2, 0] }}
+														transition={{ duration: 1.5, repeat: Infinity }}
+													>
+														→
+													</motion.div>
+												</motion.button>
+											)}
 										</div>
 									</div>
 
@@ -333,29 +356,6 @@ export default function ValleyKit() {
 									>
 										{tool.description}
 									</motion.p>
-
-									{/* Preview Button */}
-									{tool.previewImage && (
-										<motion.button
-											onClick={() => handlePreviewImage(tool)}
-											className="group/preview inline-flex items-center gap-2 px-4 py-2 mb-4 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 rounded-xl transition-all duration-200 text-sm font-medium border border-gray-200 hover:border-gray-300"
-											whileHover={{ scale: 1.02 }}
-											whileTap={{ scale: 0.98 }}
-											initial={{ opacity: 0, y: 10 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{ delay: 0.75 + toolIndex * 0.1 }}
-										>
-											<FiEye className="w-4 h-4" />
-											<span>Preview App</span>
-											<motion.div
-												className="opacity-0 group-hover/preview:opacity-100 transition-opacity"
-												animate={{ x: [0, 2, 0] }}
-												transition={{ duration: 1.5, repeat: Infinity }}
-											>
-												→
-											</motion.div>
-										</motion.button>
-									)}
 
 									{/* CTA Button */}
 									<motion.a
@@ -804,11 +804,11 @@ export default function ValleyKit() {
 				</div>
 			</motion.footer>
 
-			{/* Preview Image Modal */}
+			{/* Preview Image Modal - Mobile Optimized */}
 			<AnimatePresence>
 				{showPreview && previewImage && (
 					<motion.div
-						className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+						className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
@@ -816,15 +816,20 @@ export default function ValleyKit() {
 						onClick={closePreview}
 					>
 						<motion.div
-							className="relative max-w-5xl max-h-[90vh] w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
-							initial={{ scale: 0.8, opacity: 0, y: 50 }}
-							animate={{ scale: 1, opacity: 1, y: 0 }}
-							exit={{ scale: 0.8, opacity: 0, y: 50 }}
-							transition={{ type: "spring", damping: 25, stiffness: 300 }}
+							className="relative w-full h-full sm:max-w-4xl sm:max-h-[90vh] sm:w-auto sm:h-auto bg-white sm:rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+							initial={{ y: "100%", opacity: 0 }}
+							animate={{ y: 0, opacity: 1 }}
+							exit={{ y: "100%", opacity: 0 }}
+							transition={{ type: "spring", damping: 30, stiffness: 400 }}
 							onClick={(e) => e.stopPropagation()}
 						>
+							{/* Mobile Header with Pull Handle */}
+							<div className="sm:hidden flex justify-center pt-2 pb-1 bg-gray-100">
+								<div className="w-12 h-1 bg-gray-300 rounded-full"></div>
+							</div>
+
 							{/* Modal Header */}
-							<div className={`px-6 py-4 bg-gradient-to-r ${previewImage.color} text-white relative overflow-hidden`}>
+							<div className={`px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r ${previewImage.color} text-white relative overflow-hidden flex-shrink-0`}>
 								<motion.div
 									className="absolute inset-0 bg-black/10"
 									initial={{ x: "-100%" }}
@@ -832,19 +837,18 @@ export default function ValleyKit() {
 									transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
 								/>
 								<div className="relative z-10 flex items-center justify-between">
-									<div className="flex items-center gap-3">
-										<div className="p-2 bg-white/20 rounded-lg">
-											{React.createElement(previewImage.icon, { className: "w-5 h-5" })}
+									<div className="flex items-center gap-3 min-w-0 flex-1">
+										<div className="p-2 bg-white/20 rounded-lg flex-shrink-0">
+											{React.createElement(previewImage.icon, { className: "w-4 h-4 sm:w-5 sm:h-5" })}
 										</div>
-										<div>
-											<h3 className="text-xl font-bold">{previewImage.title}</h3>
-											<p className="text-white/80 text-sm">{previewImage.subtitle}</p>
+										<div className="min-w-0 flex-1">
+											<h3 className="text-lg sm:text-xl font-bold truncate">{previewImage.title}</h3>
+											<p className="text-white/80 text-xs sm:text-sm truncate">{previewImage.subtitle}</p>
 										</div>
 									</div>
 									<motion.button
 										onClick={closePreview}
-										className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
-										whileHover={{ scale: 1.1 }}
+										className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors flex-shrink-0 ml-2"
 										whileTap={{ scale: 0.9 }}
 									>
 										<FiX className="w-5 h-5" />
@@ -852,44 +856,58 @@ export default function ValleyKit() {
 								</div>
 							</div>
 
-							{/* Image Container */}
-							<div className="p-6 bg-gray-50">
-								<motion.div
-									className="relative bg-white rounded-xl shadow-lg overflow-hidden"
-									initial={{ scale: 0.9 }}
-									animate={{ scale: 1 }}
-									transition={{ delay: 0.2, duration: 0.4 }}
-								>
-									<img
-										src={previewImage.previewImage}
-										alt={`${previewImage.title} Preview`}
-										className="w-full h-auto object-contain max-h-[60vh]"
-										loading="lazy"
-									/>
-									
-									{/* Image Overlay with Info */}
+							{/* Content Area - Scrollable */}
+							<div className="flex-1 overflow-y-auto">
+								{/* Image Container */}
+								<div className="p-3 sm:p-6 bg-gray-50">
 									<motion.div
-										className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end"
+										className="relative bg-white rounded-xl shadow-lg overflow-hidden"
+										initial={{ scale: 0.95 }}
+										animate={{ scale: 1 }}
+										transition={{ delay: 0.2, duration: 0.4 }}
 									>
-										<div className="p-6 text-white">
-											<div className="flex flex-wrap gap-2 mb-3">
-												{previewImage.features.slice(0, 4).map((feature, index) => (
-													<span
-														key={feature}
-														className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium"
-													>
-														{feature}
-													</span>
-												))}
-											</div>
-											<p className="text-sm opacity-90">{previewImage.description}</p>
+										<img
+											src={previewImage.previewImage}
+											alt={`${previewImage.title} Preview`}
+											className="w-full h-auto object-contain max-h-[40vh] sm:max-h-[50vh]"
+											loading="lazy"
+										/>
+									</motion.div>
+
+									{/* Feature Tags - Always Visible on Mobile */}
+									<motion.div
+										className="mt-4 sm:mt-6"
+										initial={{ y: 20, opacity: 0 }}
+										animate={{ y: 0, opacity: 1 }}
+										transition={{ delay: 0.3 }}
+									>
+										<h4 className="text-sm font-semibold text-gray-700 mb-3">Key Features</h4>
+										<div className="flex flex-wrap gap-2 mb-4">
+											{previewImage.features.map((feature, index) => (
+												<motion.span
+													key={feature}
+													className="px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-full text-xs font-medium border border-gray-200"
+													initial={{ scale: 0 }}
+													animate={{ scale: 1 }}
+													transition={{ delay: 0.4 + index * 0.1 }}
+												>
+													{feature}
+												</motion.span>
+											))}
+										</div>
+										
+										{/* Description */}
+										<div className="bg-white rounded-lg p-4 border border-gray-200">
+											<p className="text-sm text-gray-600 leading-relaxed">{previewImage.description}</p>
 										</div>
 									</motion.div>
-								</motion.div>
+								</div>
+							</div>
 
-								{/* Action Buttons */}
+							{/* Fixed Bottom Action Bar */}
+							<div className="flex-shrink-0 p-4 sm:p-6 bg-white border-t border-gray-200 safe-area-bottom">
 								<motion.div
-									className="flex gap-3 mt-6"
+									className="flex flex-col sm:flex-row gap-3"
 									initial={{ y: 20, opacity: 0 }}
 									animate={{ y: 0, opacity: 1 }}
 									transition={{ delay: 0.4 }}
@@ -898,11 +916,10 @@ export default function ValleyKit() {
 										href={previewImage.link}
 										target="_blank"
 										rel="noopener noreferrer"
-										className={`flex-1 inline-flex items-center justify-center gap-2 py-3 px-6 bg-gradient-to-r ${previewImage.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300`}
-										whileHover={{ scale: 1.02 }}
+										className={`flex-1 inline-flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r ${previewImage.color} text-white font-semibold rounded-2xl shadow-lg transition-all duration-300 text-center`}
 										whileTap={{ scale: 0.98 }}
 									>
-										<span>{previewImage.button}</span>
+										<span className="text-sm sm:text-base">{previewImage.button}</span>
 										{previewImage.id === 'taskpilot' ? 
 											<FiGithub className="w-5 h-5" /> : 
 											<FiExternalLink className="w-5 h-5" />
@@ -910,8 +927,7 @@ export default function ValleyKit() {
 									</motion.a>
 									<motion.button
 										onClick={closePreview}
-										className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-xl transition-colors"
-										whileHover={{ scale: 1.02 }}
+										className="sm:hidden py-3 px-6 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-2xl transition-colors text-sm"
 										whileTap={{ scale: 0.98 }}
 									>
 										Close
