@@ -161,10 +161,14 @@ export default function ValleyKit() {
 	const handlePreviewImage = (tool) => {
 		setPreviewImage(tool);
 		setShowPreview(true);
+		// Prevent body scroll when modal is open
+		document.body.style.overflow = 'hidden';
 	};
 
 	const closePreview = () => {
 		setShowPreview(false);
+		// Restore body scroll when modal is closed
+		document.body.style.overflow = 'unset';
 		setTimeout(() => setPreviewImage(null), 300);
 	};
 
