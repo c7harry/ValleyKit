@@ -1,7 +1,7 @@
 // Import React and hooks for state and effects
 import React, { useState, useEffect } from "react";
 // Import animation libraries
-import { motion} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView as useInViewHook } from "react-intersection-observer";
 // Import icons from react-icons
 import { 
@@ -14,7 +14,9 @@ import {
 	FiMail,
 	FiArrowRight,
 	FiStar,
-	FiAward
+	FiAward,
+	FiEye,
+	FiX
 } from "react-icons/fi";
 import { BsLightbulb } from "react-icons/bs";
 // Import animation on scroll library
@@ -97,8 +99,8 @@ const containerVariants = {
 const cardVariants = {
 	hidden: { 
 		opacity: 0, 
-		y: 50,
-		scale: 0.9,
+		y: 30,
+		scale: 0.95,
 	},
 	visible: { 
 		opacity: 1, 
@@ -106,73 +108,21 @@ const cardVariants = {
 		scale: 1,
 		transition: {
 			type: "spring",
-			damping: 25,
-			stiffness: 300,
+			damping: 30,
+			stiffness: 400,
+			duration: 0.6,
 		},
 	},
 	hover: {
-		y: -8,
+		y: -12,
 		scale: 1.02,
 		transition: {
 			type: "spring",
-			damping: 20,
-			stiffness: 300,
+			damping: 25,
+			stiffness: 400,
 		},
 	},
 };
-
-// This component shows a badge for each feature of a tool
-function FeatureBadge({ feature, index }) {
-	return (
-		<motion.span
-			initial={{ opacity: 0, scale: 0 }}
-			animate={{ opacity: 1, scale: 1 }}
-			transition={{ delay: index * 0.1, type: "spring" }}
-			className="inline-flex items-center px-2 py-1 text-xs font-medium bg-white/80 backdrop-blur-sm text-gray-700 rounded-full shadow-sm border border-gray-200 hover:bg-white/90 transition-all"
-		>
-			{/* Removed FiStar icon */}
-			{feature}
-		</motion.span>
-	);
-}
-
-// This component displays a preview image for each tool
-function PreviewImage({ src, alt, tool }) {
-	// useInViewHook checks if the image is visible on the screen
-	const [imageRef, imageInView] = useInViewHook({
-		threshold: 0.3,
-		triggerOnce: true,
-	});
-
-	if (!src) return null;
-
-	return (
-		<motion.div 
-			ref={imageRef}
-			className="relative flex justify-center items-center p-4 group"
-			initial={{ opacity: 0, scale: 0.8 }}
-			animate={imageInView ? { opacity: 1, scale: 1 } : {}}
-			transition={{ duration: 0.6, delay: 0.2 }}
-		>
-			<motion.div
-				className="relative"
-				whileHover={{ scale: 1.05 }}
-				transition={{ type: "spring", damping: 20 }}
-			>
-				<img
-					src={src}
-					alt={alt}
-					className="w-full max-w-xs h-auto object-contain rounded-xl shadow-xl border border-gray-200"
-				/>
-				{/* Overlay effect on hover */}
-				<motion.div
-					className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-					initial={false}
-				/>
-			</motion.div>
-		</motion.div>
-	);
-}
 
 // Main ValleyKit component
 export default function ValleyKit() {
@@ -194,6 +144,10 @@ export default function ValleyKit() {
 	});
 	// State for custom feedback message modal
 	const [feedbackMessage, setFeedbackMessage] = useState("");
+	
+	// State for preview image modal
+	const [previewImage, setPreviewImage] = useState(null);
+	const [showPreview, setShowPreview] = useState(false);
 
 	// Handle form input changes
 	const handleFormChange = (e) => {
@@ -201,6 +155,17 @@ export default function ValleyKit() {
 			...feedbackForm,
 			[e.target.name]: e.target.value
 		});
+	};
+
+	// Handle preview image display
+	const handlePreviewImage = (tool) => {
+		setPreviewImage(tool);
+		setShowPreview(true);
+	};
+
+	const closePreview = () => {
+		setShowPreview(false);
+		setTimeout(() => setPreviewImage(null), 300);
 	};
 
 	// Replace the handleFormSubmit function to use EmailJS
@@ -239,16 +204,16 @@ export default function ValleyKit() {
 			</div>
 
 			{/* Main section for the Student Learning Hub */}
-			<section className="container mx-auto px-4 sm:px-6 py-4 sm:py-3 relative z-10">
+			<section className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 relative z-10">
 				{/* Header card with title and description */}
 				<motion.div 
-					className="text-center mb-2 sm:mb-3 px-2 sm:px-3 py-2 sm:py-2 bg-gradient-to-br from-white/80 via-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-blue-100 shadow-lg max-w-4xl mx-auto relative overflow-hidden"
+					className="text-center mb-6 sm:mb-8 px-4 sm:px-6 py-4 sm:py-6 bg-gradient-to-br from-white/90 via-blue-50/90 to-indigo-50/90 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-blue-100/60 shadow-lg max-w-4xl mx-auto relative overflow-hidden"
 					data-aos="fade-up"
 					data-aos-delay="200"
 				>
 					{/* Decorative background pattern */}
-					<div className="absolute inset-0 opacity-5">
-						<div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,theme(colors.blue.500)_1px,transparent_0)] bg-[size:20px_20px]"></div>
+					<div className="absolute inset-0 opacity-[0.03]">
+						<div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,theme(colors.blue.500)_1px,transparent_0)] bg-[size:24px_24px]"></div>
 					</div>
 
 					<div className="relative z-10 flex flex-col items-center">
@@ -256,11 +221,11 @@ export default function ValleyKit() {
 						<img
 							src="/images/header.png"
 							alt="ValleyKit Header"
-							className="w-full max-w-md sm:max-w-lg mx-auto h-8 sm:h-16 object-contain drop-shadow-lg mb-3"
+							className="w-full max-w-md sm:max-w-lg mx-auto h-8 sm:h-14 object-contain drop-shadow-md mb-4"
 						/>
 						{/* Welcome message */}
 						<motion.p 
-							className="text-sm sm:text-base md:text-lg text-gray-700 max-w-3xl mx-auto mb-2 sm:mb-3 leading-relaxed px-1"
+							className="text-sm sm:text-base md:text-lg text-gray-700 max-w-3xl mx-auto mb-4 sm:mb-5 leading-relaxed font-medium"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.7 }}
@@ -280,9 +245,9 @@ export default function ValleyKit() {
 					</div>
 				</motion.div>
 
-				{/* Grid of learning tool cards */}
+				{/* Grid of learning tool cards - Minimalistic Design */}
 				<motion.div 
-					className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8 max-w-5xl mx-auto items-stretch"
+					className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 max-w-6xl mx-auto"
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
@@ -292,151 +257,145 @@ export default function ValleyKit() {
 						return (
 							<motion.div
 								key={tool.title}
-								className="group relative h-full flex flex-col"
+								className="group relative"
 								variants={cardVariants}
 								whileHover="hover"
 								data-aos="fade-up"
 								data-aos-delay={toolIndex * 100}
 							>
-								<div className="relative bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg overflow-hidden border border-gray-200/50 hover:border-gray-300/50 transition-all duration-500 flex flex-col h-full">
-									{/* Animated gradient bar at the top of the card */}
+								{/* Modern minimalistic card */}
+								<motion.div 
+									className="relative bg-white/95 backdrop-blur-xl rounded-3xl p-8 shadow-sm border border-gray-100/80 hover:shadow-xl hover:border-gray-200/80 transition-all duration-700 ease-out overflow-hidden"
+									whileHover={{ y: -8 }}
+									transition={{ duration: 0.4, ease: "easeOut" }}
+								>
+									{/* Subtle gradient accent */}
 									<motion.div 
-										className={`h-1.5 bg-gradient-to-r ${tool.color} relative overflow-hidden`}
+										className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${tool.color} opacity-60`}
 										initial={{ scaleX: 0 }}
 										animate={{ scaleX: 1 }}
-										transition={{ delay: 0.2 + toolIndex * 0.1, duration: 0.8 }}
-									>
-										<motion.div
-											className="absolute inset-0 bg-white/30"
-											animate={{
-												x: ["-100%", "100%"],
-											}}
-											transition={{
-												duration: 2,
-												repeat: Infinity,
-												ease: "linear",
-												delay: toolIndex * 0.5,
-											}}
-										/>
-									</motion.div>
-
-									{/* Tool header image and icon */}
-									{tool.headerImage && (
-										<motion.div 
-											className="bg-gradient-to-br from-gray-50/50 to-white/50 backdrop-blur-sm p-3 border-b border-gray-100/50 relative"
-											initial={{ opacity: 0, y: -20 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{ delay: 0.4 + toolIndex * 0.1 }}
-										>
-											<div className="flex items-center justify-center gap-3">
-												{/* Tool icon in a colored circle */}
-												<motion.div
-													className={`p-2 rounded-lg bg-gradient-to-r ${tool.color} text-white shadow-lg`}
-													whileHover={{ rotate: [0, -10, 10, 0] }}
-													transition={{ duration: 0.5 }}
-												>
-													<IconComponent className="w-5 h-5" />
-												</motion.div>
-												{/* Tool header image - bigger size */}
-												<img
-													src={tool.headerImage}
-													alt={tool.title + " Header"}
-													className="h-8 sm:h-16 object-contain filter drop-shadow-md flex-1"
-												/>
-											</div>
-										</motion.div>
-									)}
-
-									{/* Preview image for the tool */}
-									{tool.previewImage && (
-										<PreviewImage 
-											src={tool.previewImage} 
-											alt={`${tool.title} Preview`}
-											tool={tool}
-										/>
-									)}
+										transition={{ delay: 0.3 + toolIndex * 0.1, duration: 0.8, ease: "easeOut" }}
+									/>
 									
-									{/* Card content: features, title, description, and button */}
-									<div className="p-4 space-y-3 flex flex-col flex-1">
-										{/* List of features as badges */}
-										<motion.div 
-											className="flex flex-wrap gap-1 justify-center"
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											transition={{ delay: 0.6 + toolIndex * 0.1 }}
+									{/* Icon and Title Header */}
+									<div className="flex items-start gap-4 mb-6">
+										<motion.div
+											className={`p-3 rounded-2xl bg-gradient-to-br ${tool.color} text-white shadow-lg`}
+											whileHover={{ rotate: [0, -5, 5, 0], scale: 1.05 }}
+											transition={{ duration: 0.6 }}
 										>
-											{tool.features.map((feature, index) => (
-												<FeatureBadge key={feature} feature={feature} index={index} />
-											))}
+											<IconComponent className="w-6 h-6" />
 										</motion.div>
-
-										{/* Tool title with animated icon */}
-										<motion.h3 
-											className="text-lg sm:text-xl font-extrabold text-gray-800 group-hover:text-blue-600 transition-colors duration-300 flex items-center gap-2"
-											initial={{ opacity: 0, x: -20 }}
-											animate={{ opacity: 1, x: 0 }}
-											transition={{ delay: 0.7 + toolIndex * 0.1 }}
-										>
-											{tool.title}
-										</motion.h3>
 										
-										{/* Tool subtitle if it exists */}
-										{tool.subtitle && (
-											<motion.p 
-												className="text-sm sm:text-base text-blue-700 font-semibold"
+										<div className="flex-1 min-w-0">
+											<motion.h3 
+												className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors duration-300"
 												initial={{ opacity: 0, x: -20 }}
 												animate={{ opacity: 1, x: 0 }}
-												transition={{ delay: 0.8 + toolIndex * 0.1 }}
+												transition={{ delay: 0.4 + toolIndex * 0.1 }}
+											>
+												{tool.title}
+											</motion.h3>
+											<motion.p 
+												className="text-sm font-medium text-gray-500 tracking-wide"
+												initial={{ opacity: 0, x: -20 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ delay: 0.5 + toolIndex * 0.1 }}
 											>
 												{tool.subtitle}
 											</motion.p>
-										)}
+										</div>
+									</div>
 
-										{/* Tool description */}
-										<motion.p 
-											className="text-xs sm:text-sm text-gray-600 leading-relaxed"
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											transition={{ delay: 0.9 + toolIndex * 0.1 }}
-										>
-											{tool.description}
-										</motion.p>
+									{/* Clean feature tags */}
+									<motion.div 
+										className="flex flex-wrap gap-2 mb-6"
+										initial={{ opacity: 0, y: 10 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ delay: 0.6 + toolIndex * 0.1 }}
+									>
+										{tool.features.slice(0, 3).map((feature, index) => (
+											<span
+												key={feature}
+												className="px-3 py-1 text-xs font-medium bg-gray-50 text-gray-600 rounded-full border border-gray-100 hover:bg-gray-100 transition-colors duration-200"
+											>
+												{feature}
+											</span>
+										))}
+									</motion.div>
 
-										<div className="flex-1" /> {/* Spacer to push button to bottom */}
+									{/* Description */}
+									<motion.p 
+										className="text-gray-600 leading-relaxed mb-8 line-clamp-3"
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										transition={{ delay: 0.7 + toolIndex * 0.1 }}
+									>
+										{tool.description}
+									</motion.p>
 
-										{/* Button to open the tool's link */}
-										<motion.a
-											href={tool.link}
-											target="_blank"
-											rel="noopener noreferrer"
-											className={`group/btn inline-flex items-center justify-center w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-gradient-to-r ${tool.color} text-white text-sm sm:text-base font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden mt-auto`}
+									{/* Preview Button */}
+									{tool.previewImage && (
+										<motion.button
+											onClick={() => handlePreviewImage(tool)}
+											className="group/preview inline-flex items-center gap-2 px-4 py-2 mb-4 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 rounded-xl transition-all duration-200 text-sm font-medium border border-gray-200 hover:border-gray-300"
 											whileHover={{ scale: 1.02 }}
 											whileTap={{ scale: 0.98 }}
-											initial={{ opacity: 0, y: 20 }}
+											initial={{ opacity: 0, y: 10 }}
 											animate={{ opacity: 1, y: 0 }}
-											transition={{ delay: 1 + toolIndex * 0.1 }}
+											transition={{ delay: 0.75 + toolIndex * 0.1 }}
 										>
-											{/* Animated shine effect on button */}
+											<FiEye className="w-4 h-4" />
+											<span>Preview App</span>
 											<motion.div
-												className="absolute inset-0 bg-white/20"
-												initial={{ x: "-100%" }}
-												whileHover={{ x: "100%" }}
-												transition={{ duration: 0.5 }}
-											/>
-											<span className="relative z-10 flex items-center gap-2">
-												{tool.button}
-												<motion.div
-													className="group-hover/btn:translate-x-1 transition-transform duration-200"
-													animate={{ x: [0, 3, 0] }}
-													transition={{ duration: 2, repeat: Infinity, delay: toolIndex * 0.5 }}
-												>
-													{/* Show GitHub icon for TaskPilot, otherwise external link icon */}
-													{tool.id === 'taskpilot' ? <FiGithub /> : <FiExternalLink />}
-												</motion.div>
-											</span>
-										</motion.a>
-									</div>
-								</div>
+												className="opacity-0 group-hover/preview:opacity-100 transition-opacity"
+												animate={{ x: [0, 2, 0] }}
+												transition={{ duration: 1.5, repeat: Infinity }}
+											>
+												→
+											</motion.div>
+										</motion.button>
+									)}
+
+									{/* CTA Button */}
+									<motion.a
+										href={tool.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="group/btn inline-flex items-center justify-center w-full py-4 px-6 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-2xl transition-all duration-300 relative overflow-hidden"
+										whileHover={{ scale: 1.02 }}
+										whileTap={{ scale: 0.98 }}
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ delay: 0.8 + toolIndex * 0.1 }}
+									>
+										<motion.div
+											className={`absolute inset-0 bg-gradient-to-r ${tool.color} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}
+										/>
+										<span className="relative z-10 flex items-center gap-3">
+											{tool.button}
+											<motion.div
+												animate={{ x: [0, 4, 0] }}
+												transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+											>
+												{tool.id === 'taskpilot' ? 
+													<FiGithub className="w-5 h-5" /> : 
+													<FiExternalLink className="w-5 h-5" />
+												}
+											</motion.div>
+										</span>
+									</motion.a>
+
+									{/* Subtle hover effects */}
+									<motion.div
+										className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+										style={{
+											background: `linear-gradient(135deg, ${tool.color.includes('cyan') ? 'rgba(34, 211, 238, 0.03)' : 
+												tool.color.includes('green') ? 'rgba(34, 197, 94, 0.03)' : 
+												'rgba(168, 85, 247, 0.03)'} 0%, transparent 100%)`
+										}}
+									/>
+								</motion.div>
 							</motion.div>
 						);
 					})}
@@ -444,7 +403,7 @@ export default function ValleyKit() {
 			</section>
 
 			{/* Feedback Section - Unique Design */}
-			<section className="w-full max-w-2xl mx-auto px-2 sm:px-4 pt-0 pb-0 -mb-5 relative z-10">
+			<section className="w-full max-w-2xl mx-auto px-2 sm:px-4 pt-0 pb-0 -mb-4 -mt-4 relative z-10">
 				<motion.div 
 					className="w-full"
 					initial={{ opacity: 0, y: 15 }}
@@ -844,6 +803,125 @@ export default function ValleyKit() {
 					</motion.div>
 				</div>
 			</motion.footer>
+
+			{/* Preview Image Modal */}
+			<AnimatePresence>
+				{showPreview && previewImage && (
+					<motion.div
+						className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.3 }}
+						onClick={closePreview}
+					>
+						<motion.div
+							className="relative max-w-5xl max-h-[90vh] w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
+							initial={{ scale: 0.8, opacity: 0, y: 50 }}
+							animate={{ scale: 1, opacity: 1, y: 0 }}
+							exit={{ scale: 0.8, opacity: 0, y: 50 }}
+							transition={{ type: "spring", damping: 25, stiffness: 300 }}
+							onClick={(e) => e.stopPropagation()}
+						>
+							{/* Modal Header */}
+							<div className={`px-6 py-4 bg-gradient-to-r ${previewImage.color} text-white relative overflow-hidden`}>
+								<motion.div
+									className="absolute inset-0 bg-black/10"
+									initial={{ x: "-100%" }}
+									animate={{ x: "100%" }}
+									transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+								/>
+								<div className="relative z-10 flex items-center justify-between">
+									<div className="flex items-center gap-3">
+										<div className="p-2 bg-white/20 rounded-lg">
+											{React.createElement(previewImage.icon, { className: "w-5 h-5" })}
+										</div>
+										<div>
+											<h3 className="text-xl font-bold">{previewImage.title}</h3>
+											<p className="text-white/80 text-sm">{previewImage.subtitle}</p>
+										</div>
+									</div>
+									<motion.button
+										onClick={closePreview}
+										className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+										whileHover={{ scale: 1.1 }}
+										whileTap={{ scale: 0.9 }}
+									>
+										<FiX className="w-5 h-5" />
+									</motion.button>
+								</div>
+							</div>
+
+							{/* Image Container */}
+							<div className="p-6 bg-gray-50">
+								<motion.div
+									className="relative bg-white rounded-xl shadow-lg overflow-hidden"
+									initial={{ scale: 0.9 }}
+									animate={{ scale: 1 }}
+									transition={{ delay: 0.2, duration: 0.4 }}
+								>
+									<img
+										src={previewImage.previewImage}
+										alt={`${previewImage.title} Preview`}
+										className="w-full h-auto object-contain max-h-[60vh]"
+										loading="lazy"
+									/>
+									
+									{/* Image Overlay with Info */}
+									<motion.div
+										className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end"
+									>
+										<div className="p-6 text-white">
+											<div className="flex flex-wrap gap-2 mb-3">
+												{previewImage.features.slice(0, 4).map((feature, index) => (
+													<span
+														key={feature}
+														className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium"
+													>
+														{feature}
+													</span>
+												))}
+											</div>
+											<p className="text-sm opacity-90">{previewImage.description}</p>
+										</div>
+									</motion.div>
+								</motion.div>
+
+								{/* Action Buttons */}
+								<motion.div
+									className="flex gap-3 mt-6"
+									initial={{ y: 20, opacity: 0 }}
+									animate={{ y: 0, opacity: 1 }}
+									transition={{ delay: 0.4 }}
+								>
+									<motion.a
+										href={previewImage.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className={`flex-1 inline-flex items-center justify-center gap-2 py-3 px-6 bg-gradient-to-r ${previewImage.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300`}
+										whileHover={{ scale: 1.02 }}
+										whileTap={{ scale: 0.98 }}
+									>
+										<span>{previewImage.button}</span>
+										{previewImage.id === 'taskpilot' ? 
+											<FiGithub className="w-5 h-5" /> : 
+											<FiExternalLink className="w-5 h-5" />
+										}
+									</motion.a>
+									<motion.button
+										onClick={closePreview}
+										className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-xl transition-colors"
+										whileHover={{ scale: 1.02 }}
+										whileTap={{ scale: 0.98 }}
+									>
+										Close
+									</motion.button>
+								</motion.div>
+							</div>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 }
