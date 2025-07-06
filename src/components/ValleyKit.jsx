@@ -705,16 +705,13 @@ export default function ValleyKit() {
 								</motion.div>
 							</motion.div>
 						)}
-
-						{/* Bottom decoration */}
-						{/* Removed animated dots under Send Feedback button as requested */}
 					</div>
 				</motion.div>
 			</section>
 
 			{/* Footer section with info and links */}
 			<motion.footer 
-				className="relative bg-[#1e558e] text-white py-2 sm:py-2 mt-6 sm:mt-8 overflow-hidden"
+				className="relative bg-[#1e558e] text-white py-0 sm:py-0 mt-6 sm:mt-8 overflow-hidden"
 				initial={{ opacity: 0, y: 50 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
@@ -756,7 +753,7 @@ export default function ValleyKit() {
 							variants={cardVariants}
 						>
 							<motion.div 
-								className="flex justify-center md:justify-start items-center mb-1.5 sm:mb-2"
+								className="flex justify-center md:justify-start items-center mb-1.5 sm:mb-2 pt-3 sm:pt-4"
 								whileHover={{ scale: 1.05 }}
 							>
 								<img
@@ -776,11 +773,11 @@ export default function ValleyKit() {
 							className="text-center"
 							variants={cardVariants}
 						>
-							<h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-blue-200 flex items-center justify-center gap-1">
+							<h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-blue-200 flex items-center justify-center gap-1 pt-3 sm:pt-4">
 								<FiTrendingUp className="text-sm" />
 								Student Resources
 							</h4>
-							<ul className="space-y-0.5 text-gray-300 text-xs">
+							<ul className="space-y-0.5 text-gray-300 text-xs mb-0 p-1">
 								{[
 									{ label: "Apply Today", href: "https://www.bayvalleytech.com/apply" },
 									{ label: "Contact", href: "https://www.bayvalleytech.com/contact-us" },
@@ -809,7 +806,7 @@ export default function ValleyKit() {
 
 						{/* Contact info section */}
 						<motion.div 
-							className="text-center md:text-right"
+							className="text-center md:text-right pt-3 sm:pt-4"
 							variants={cardVariants}
 						>
 							<h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-blue-200 flex items-center justify-center md:justify-end gap-1">
