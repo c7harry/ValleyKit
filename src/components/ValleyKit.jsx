@@ -411,8 +411,8 @@ export default function ValleyKit() {
 					transition={{ duration: 0.6 }}
 					viewport={{ once: true }}
 				>
-					{/* Feedback Card with dock design, now a single row and reduced height */}
-					<div className="relative w-full bg-gradient-to-br from-[#eaf3fb] via-blue-50 to-blue-100 rounded-2xl p-2 sm:p-3 border border-blue-200/50 shadow-lg overflow-visible flex flex-row items-center min-h-[120px] max-h-[160px]">
+					{/* Feedback Card with dock design - Mobile optimized layout */}
+					<div className="relative w-full bg-gradient-to-br from-[#eaf3fb] via-blue-50 to-blue-100 rounded-2xl p-2 sm:p-3 border border-blue-200/50 shadow-lg overflow-visible">
 						{/* Animated background elements */}
 						<div className="absolute inset-0 overflow-hidden pointer-events-none">
 							<motion.div
@@ -427,10 +427,71 @@ export default function ValleyKit() {
 							/>
 						</div>
 
-						<div className="relative z-10 flex flex-row items-center justify-between w-full">
+						{/* Mobile Layout: Stacked */}
+						<div className="relative z-10 flex flex-col space-y-3 sm:hidden">
+							{/* Action Cards Row */}
+							<motion.div 
+								className="flex flex-row justify-center gap-2"
+								variants={{
+									hidden: { opacity: 0 },
+									visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+								}}
+								initial="hidden"
+								whileInView="visible"
+								viewport={{ once: true }}
+							>
+								{[
+									{
+										icon: BsLightbulb,
+										title: "Request Tool",
+										description: "Suggest new tools",
+										color: "from-yellow-400 to-orange-500"
+									},
+									{
+										icon: FiAward,
+										title: "Report Bug", 
+										description: "Help fix issues",
+										color: "from-red-400 to-pink-500"
+									},
+									{
+										icon: FiStar,
+										title: "Share Ideas",
+										description: "Suggest improvements",
+										color: "from-purple-400 to-indigo-500"
+									}
+								].map((item, index) => {
+									const IconComponent = item.icon;
+									return (
+										<motion.div
+											key={item.title}
+											className="flex flex-col items-center bg-white/80 backdrop-blur-md rounded-xl px-3 py-2 border border-gray-200/50 shadow-md hover:shadow-lg transition-all duration-300 flex-1 max-w-[100px] h-[80px] justify-center"
+											variants={{
+												hidden: { opacity: 0, y: 10 },
+												visible: { opacity: 1, y: 0 }
+											}}
+											whileTap={{ scale: 0.95 }}
+										>
+											<div className={`w-7 h-7 mb-1 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center text-white shadow-lg`}>
+												<IconComponent className="w-4 h-4" />
+											</div>
+											<h4 className="font-bold text-gray-800 mb-0.5 text-[10px] text-center leading-tight">{item.title}</h4>
+											<p className="text-[9px] text-gray-600 text-center leading-tight">{item.description}</p>
+										</motion.div>
+									);
+								})}
+							</motion.div>
+
+							{/* CTA Button Row - Mobile Only */}
+							<div className="flex justify-center pt-1">
+								<SendFeedbackButton onClick={() => setShowFeedbackForm(true)} />
+							</div>
+						</div>
+
+						{/* Desktop Layout: Single Row */}
+						<div className="relative z-10 hidden sm:flex flex-row items-center justify-between w-full min-h-[120px] max-h-[160px]">
 							{/* Action Cards Dock Row */}
 							<motion.div 
-								className="flex flex-row justify-center gap-3 sm:gap-3"
+								className="flex flex-row justify-center gap-3"
 								variants={{
 									hidden: { opacity: 0 },
 									visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -480,7 +541,7 @@ export default function ValleyKit() {
 								})}
 							</motion.div>
 
-							{/* CTA Button */}
+							{/* CTA Button - Desktop */}
 							<div className="flex-1 flex justify-center">
 								<SendFeedbackButton onClick={() => setShowFeedbackForm(true)} />
 							</div>
