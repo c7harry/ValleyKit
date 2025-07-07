@@ -735,7 +735,7 @@ export default function ValleyKit() {
 
 			{/* Footer section with info and links */}
 			<motion.footer 
-				className="relative bg-[#1e558e] text-white py-6 sm:py-8 mt-6 sm:mt-8 overflow-hidden"
+				className="relative bg-[#1e558e] text-white py-4 sm:py-8 mt-6 sm:mt-8 overflow-hidden"
 				initial={{ opacity: 0, y: 50 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
@@ -765,39 +765,39 @@ export default function ValleyKit() {
 				</div>
 
 				<div className="relative container mx-auto px-4 sm:px-6">
-					{/* Mobile Layout: Stacked Cards */}
-					<div className="block sm:hidden space-y-4">
+					{/* Mobile Layout: Compact Cards */}
+					<div className="block sm:hidden space-y-2">
 						{/* Logo and Company Info */}
 						<motion.div 
-							className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10"
+							className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10"
 							variants={cardVariants}
 						>
 							<motion.div 
-								className="flex justify-center items-center mb-2"
+								className="flex justify-center items-center mb-1"
 								whileHover={{ scale: 1.02 }}
 							>
 								<img
 									src="/images/BVT Logo.png"
 									alt="Bay Valley Tech Logo"
-									className="w-7 h-7"
+									className="w-5 h-5"
 								/>
-								<span className="text-lg font-bold ml-2">Bay Valley Tech</span>
+								<span className="text-base font-bold ml-1.5">Bay Valley Tech</span>
 							</motion.div>
-							<p className="text-white/80 text-sm leading-relaxed">
+							<p className="text-white/80 text-xs leading-relaxed">
 								Empowering careers, enriching communities through free tech education and digital skills training.
 							</p>
 						</motion.div>
 
 						{/* Links Section */}
 						<motion.div 
-							className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10"
+							className="bg-white/5 backdrop-blur-sm rounded-xl p-2.5 border border-white/10"
 							variants={cardVariants}
 						>
-							<h4 className="text-sm font-semibold mb-3 text-white/90 flex items-center justify-center gap-2">
-								<FiTrendingUp className="text-base" />
+							<h4 className="text-xs font-semibold mb-2 text-white/90 flex items-center justify-center gap-1.5">
+								<FiTrendingUp className="text-sm" />
 								Student Resources
 							</h4>
-							<div className="flex justify-center gap-4">
+							<div className="flex justify-center gap-3">
 								{[
 									{ label: "Apply Today", href: "https://www.bayvalleytech.com/apply" },
 									{ label: "Contact", href: "https://www.bayvalleytech.com/contact-us" },
@@ -808,13 +808,13 @@ export default function ValleyKit() {
 										href={link.href}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-white/80 hover:text-white text-xs font-medium transition-colors duration-200 flex items-center gap-1 hover:scale-105"
+										className="text-white/80 hover:text-white text-[10px] font-medium transition-colors duration-200 flex items-center gap-0.5"
 										initial={{ opacity: 0, y: 10 }}
 										animate={{ opacity: 1, y: 0 }}
 										transition={{ delay: 0.2 + index * 0.1 }}
 										whileHover={{ scale: 1.05 }}
 									>
-										<FiArrowRight className="text-xs" />
+										<FiArrowRight className="text-[10px]" />
 										{link.label}
 									</motion.a>
 								))}
@@ -823,33 +823,33 @@ export default function ValleyKit() {
 
 						{/* Contact Section */}
 						<motion.div 
-							className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10"
+							className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-2.5 border border-white/10"
 							variants={cardVariants}
 						>
-							<h4 className="text-sm font-semibold mb-3 text-white/90 flex items-center justify-center gap-2">
-								<FiMail className="text-base" />
+							<h4 className="text-xs font-semibold mb-2 text-white/90 flex items-center justify-center gap-1.5">
+								<FiMail className="text-sm" />
 								Connect With Us
 							</h4>
-							<motion.div className="space-y-2">
+							<motion.div className="space-y-1">
 								<motion.a 
 									href="mailto:info@bayvalleytech.com" 
-									className="block text-white/80 hover:text-white text-xs font-medium transition-colors duration-200"
+									className="block text-white/80 hover:text-white text-[10px] font-medium transition-colors duration-200"
 									whileHover={{ scale: 1.02 }}
 								>
 									info@bayvalleytech.com
 								</motion.a>
-								<p className="text-white/70 text-xs">Join our Discord for quick help!</p>
+								<p className="text-white/70 text-[10px]">Join our Discord for quick help!</p>
 							</motion.div>
 						</motion.div>
 
 						{/* Copyright */}
 						<motion.div 
-							className="text-center pt-2"
+							className="text-center pt-1"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ delay: 0.8 }}
 						>
-							<p className="text-white/60 text-xs">
+							<p className="text-white/60 text-[10px]">
 								&copy; 2025 Bay Valley Tech. All rights reserved.
 							</p>
 						</motion.div>
